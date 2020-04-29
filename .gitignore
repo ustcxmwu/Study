@@ -129,5 +129,7 @@ dmypy.json
 *.csv
 *.txt
 
+.idea/
+
 
 
