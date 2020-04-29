@@ -1,6 +1,6 @@
-from recordclass import RecordClass, litelist
+from recordclass import RecordClass
 
-from record_test.skill import PAType, DrugType, ArrowType, PAParams, PlayerAction
+from package_test.record_test.skill import PAType, DrugType, ArrowType, PAParams, PlayerAction
 
 
 class Star:

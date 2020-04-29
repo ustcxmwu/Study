@@ -26,5 +26,6 @@ def on_draw():
 def on_window_close(window):
     event_loop.exit()
 
+
 if __name__ == '__main__':
     pyglet.app.run()
