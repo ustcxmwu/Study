@@ -1,0 +1,13 @@
+  EMAIL:
+    Smtp_Server: smtp.mxhichina.com
+    Smtp_Sender: test@tenez.com
+    Password: Password
+    OnLine_Receiver: techtest@tenez.com
+    on-off: on
+
+  DB:
+    host: localhost
+    username: myself
+    password: skyyj
+    port: 3306
+    database: mystudy
