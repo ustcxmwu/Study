@@ -1,5 +1,15 @@
 # coding=utf-8
-__author__ = 'zhangxiaozi'
+'''
+File: mnist.py
+Project: mnist
+File Created: Wednesday, 29th April 2020 7:25:39 pm
+Author: wuxiaomin (xmwu@mail.ustc.edu.cn)
+-----
+Last Modified: Friday, 3rd July 2020 11:37:02 am
+Modified By: wuxiaomin (xmwu@mail.ustc.edu.cn>)
+-----
+Copyright (c) 2020 ustc
+'''
 
 import tensorflow as tf
 from tensorflow.examples.tutorials.mnist import input_data

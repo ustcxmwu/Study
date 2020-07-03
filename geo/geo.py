@@ -1,6 +1,7 @@
 from sympy import Point, Circle, Ellipse, Point2D
 import math
 
+
 def sym():
     e1 = Ellipse(Point(0, 0), 3, 2)
     line = e1.tangent_lines(Point(3, 0))
