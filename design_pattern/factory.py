@@ -43,14 +43,14 @@ class Profile(metaclass=ABCMeta):
         self.sections.append(section)
 
 
-class linkedin(Profile):
+class LinkedIn(Profile):
     def create_profile(self):
         self.add_sections(PersonalSection())
         self.add_sections(PatentSection())
         self.add_sections(PublicationSection())
 
 
-class facebook(Profile):
+class FaceBook(Profile):
     def create_profile(self):
         self.add_sections(PersonalSection())
         self.add_sections(AlbumSection())
@@ -58,6 +58,6 @@ class facebook(Profile):
 
 if __name__=='__main__':
     profile_type = input('Facebook or Linkedin?')
-    profile = eval(profile_type.lower())()
+    profile = eval(profile_type)()
     print('Creating Profile..', type(profile).__name__)
     print('profile has sections -- ', profile.get_sections())
