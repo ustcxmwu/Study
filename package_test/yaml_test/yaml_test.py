@@ -12,11 +12,8 @@ if __name__=='__main__':
     yamlPath = os.path.join(fileNamePath, 'config.yaml')
     print(yamlPath)
 
-    f = open(yamlPath, 'r', encoding='utf-8')
-
-    cont = f.read()
-
-    x = yaml.load(cont)
+    with open(yamlPath, mode='r', encoding='utf-8') as f:
+        x = yaml.load(f, Loader=yaml.SafeLoader)
 
     print(type(x))
     print(x)
@@ -30,6 +27,7 @@ if __name__=='__main__':
     print(x.get('DB').get('host'))
 
     print(type(x.get('DB')))
-    fw = open('test.yaml', 'a', encoding='utf-8')
-    yaml.dump(x, fw)
+    with open('test.yaml', mode='w') as f:
+        yaml.dump(x, f)
+
 

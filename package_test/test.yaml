@@ -1,3 +1,0 @@
-DB: {database: mystudy, host: localhost, password: skyyj, port: 3306, username: myself}
-EMAIL: {OnLine_Receiver: techtest@tenez.com, Password: Password, Smtp_Sender: test@tenez.com,
-  Smtp_Server: smtp.mxhichina.com, on-off: true}
