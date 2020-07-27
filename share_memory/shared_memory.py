@@ -1,5 +1,6 @@
 # from multiprocessing import Process, Value, RawArray
 import multiprocessing as mp
+import numpy as np
 
 
 def f(n, a):
@@ -18,13 +19,13 @@ def extract_params_as_shared_arrays(model):
     weights_dict = model.get_all_weights()
     weight_list = []
 
-
     for k,v in weights_dict.items():
         weight_list += v
 
     for weights in weight_list:
         shared_arrays.append(mp.RawArray('f', weights.ravel()))
     return shared_arrays
+
 
 def mpraw_as_np(shape, dtype):
     """Construct a numpy array of the specified shape and dtype for which the
