@@ -135,4 +135,5 @@ dmypy.json
 */mnist/
 
 
+.DS_Store
 
