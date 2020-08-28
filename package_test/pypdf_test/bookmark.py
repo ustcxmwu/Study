@@ -141,6 +141,6 @@ class MyPDFHandler(object):
 
 
 if __name__ == '__main__':
-    handler = MyPDFHandler("./2012.李航.统计学习方法-origin.pdf")
-    handler.add_bookmarks_by_read_txt("./李航.txt", page_offset=16)
-    handler.save2file("./2012.李航.统计学习方法.pdf")
+    handler = MyPDFHandler("./深度强化学习原理与实践a.pdf")
+    handler.add_bookmarks_by_read_txt("./rl.txt", page_offset=26)
+    handler.save2file("./深度强化学习原理与实践.pdf")

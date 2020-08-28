@@ -4,6 +4,8 @@
 
 
 if __name__ == '__main__':
-    a = (2, 3)
-    print(tuple(a))
-    print(tuple([1, 3]))
+    a = [[], []]
+    b = [ item is not None for item in a]
+    print(all(a))
+    print(all(b))
+

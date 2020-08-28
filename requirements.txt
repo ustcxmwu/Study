@@ -81,3 +81,4 @@ wincertstore==0.2
 wrapt==1.11.2
 zipp==3.1.0
 zmail==0.2.5
+PyPDF2
