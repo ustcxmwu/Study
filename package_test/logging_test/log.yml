@@ -1,0 +1,45 @@
+version: 1
+disable_existing_loggers: False
+formatters:
+  simple:
+    format: '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+handlers:
+  console:
+    class : logging.StreamHandler
+    formatter: simple
+    level   : INFO
+    stream  : ext://sys.stdout
+  file_handler:
+    class : logging.handlers.RotatingFileHandler
+    level: DEBUG
+    formatter: simple
+    filename: log/env_checker.log
+    maxBytes: 1048576
+    backupCount: 20
+    encoding: utf8
+  report_handler:
+    class: logging.handlers.RotatingFileHandler
+    level: DEBUG
+    formatter: simple
+    filename: log/check_report.log
+    maxBytes: 1048576
+    backupCount: 20
+    encoding: utf8
+
+loggers:
+  env_checker:
+    level: DEBUG
+    handlers: [console, file_handler]
+    propagate: no
+  checker:
+    level: DEBUG
+    handlers: [console, report_handler]
+    propagate: no
+  console:
+    level: DEBUG
+    handlers: [console]
+    propagate: no
+
+root:
+  level: CRITICAL
+  handlers: [console, file_handler]
