@@ -4,7 +4,7 @@ import pytest
 class Singleton1(object):
     def __new__(cls, *args, **kwargs):
         if not hasattr(cls, 'instance'):
-            cls.instance = super(Singleton1, cls).__new__(cls)
+            cls.instance = super().__new__(cls)
         return cls.instance
 
 
