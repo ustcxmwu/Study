@@ -5,6 +5,7 @@ from cerberus import Validator
 import yaml
 from easydict import EasyDict
 from bidict import bidict, namedbidict
+from cerberus import Validator
 
 
 
@@ -14,6 +15,7 @@ if __name__ == '__main__':
     print(tmm)
 
     Tmm = namedbidict("Tmm", "team_member", "model")
+
 
 
 

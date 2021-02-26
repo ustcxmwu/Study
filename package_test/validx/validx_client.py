@@ -26,3 +26,11 @@ if __name__ == '__main__':
 
     err.sort()
     print(err)
+
+
+    a = Int(min=0, max=0,options=[1])
+    b = -1
+    try:
+        a(b)
+    except exc.ValidationError as e:
+        print(e)
