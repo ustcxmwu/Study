@@ -1,11 +1,21 @@
-#  Copyright (c) 2021. Xiaomin Wu <xmwu@mail.ustc.edu.cn>
-#  All rights reserved.
 import os
+from abc import ABCMeta, abstractmethod
 
 verbose = True
 
 
-class RenameFile(object):
+class Command(metaclass=ABCMeta):
+
+    @abstractmethod
+    def execute(self):
+        pass
+
+    @abstractmethod
+    def undo(self):
+        pass
+
+
+class RenameFile(Command):
 
     def __init__(self, path_src, path_dest):
         self.src = path_src
@@ -22,7 +32,7 @@ class RenameFile(object):
         os.rename(self.dest, self.src)
 
 
-class CreateFile(object):
+class CreateFile(Command):
 
     def __init__(self, path, txt="Hello world.\n"):
         self.path, self.txt = path, txt
@@ -37,7 +47,7 @@ class CreateFile(object):
         delete_file(self.path)
 
 
-class ReadFile(object):
+class ReadFile(Command):
 
     def __init__(self, path):
         self.path = path
@@ -47,6 +57,9 @@ class ReadFile(object):
             print("[reading file '{}']".format(self.path))
         with open(self.path, mode='r') as infile:
             print(infile.read(), end=" ")
+
+    def undo(self):
+        pass
 
 
 def delete_file(path):

@@ -1,5 +1,3 @@
-#  Copyright (c) 2021. Xiaomin Wu <xmwu@mail.ustc.edu.cn>
-#  All rights reserved.
 
 quotes = ("A man is not complete until the is married. Then he is finished.",
           "As I said before, I never repeat myself.",

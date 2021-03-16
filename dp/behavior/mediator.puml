@@ -1,0 +1,27 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+abstract class Mediator {
+    name
+    commp
+    {abstract} send(msg: str, colleague: Colleague)
+}
+abstract class Colleague {
+    mediator
+}
+Colleague <|-- ConcreteColleagueA
+Colleague <|-- ConcreteColleagueB
+Mediator <|-- ConcreteMediator
+
+class ConcreteColleagueA {
+    zhaozu(name, address, area, price)
+}
+class ConcreteColleagueB {
+    qiuzu(name, address, area, price)
+}
+class ConcreteMediator {
+    intro_self()
+    send(name, msg)
+}
+
+@enduml

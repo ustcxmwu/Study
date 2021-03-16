@@ -1,0 +1,32 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+class Publisher {
+    Observer[] observers
+    add(o: Observer)
+    remove(o: Observer)
+    notify()
+}
+
+class DefaultFormatter {
+    data
+}
+
+Publisher <|-- DefaultFormatter
+
+abstract class Observer {
+    notify(p: Publisher)
+}
+
+class HexFormatter {
+    notify(p: Publisher)
+}
+
+class BinaryFormatter {
+    notify(p: Publisher)
+}
+
+Observer <|-- HexFormatter
+Observer <|-- BinaryFormatter
+
+@enduml

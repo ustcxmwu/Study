@@ -1,0 +1,45 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+abstract class Iterator
+abstract class Aggregate
+class Item
+
+Iterator <|-- ConcreteIterator
+Iterator <|-- ConcreteIteratorDesc
+Aggregate <|-- ConcreteAggregate
+
+abstract class Iterator{
+    {abstract} Item first()
+    {abstract} Item next()
+    {abstract} bool is_done()
+    {abstract} Item curr_item()
+}
+
+abstract class Aggregate{
+    Item[] data
+    {abstract} Iterator create_iterator()
+}
+
+class ConcreteIterator {
+    Item first()
+    Item next()
+    bool is_done()
+    Item curr_item()
+}
+
+class ConcreteIteratorDesc {
+    Item first()
+    Item next()
+    bool is_done()
+    Item curr_item()
+}
+
+class ConcreteAggregate {
+    Iterator create_iterator()
+}
+
+
+
+
+@enduml

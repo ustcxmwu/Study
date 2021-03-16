@@ -1,43 +1,81 @@
-#  Copyright (c) 2021. Xiaomin Wu <xmwu@mail.ustc.edu.cn>
-#  All rights reserved.
-import functools
+from abc import ABCMeta, abstractmethod
 
 
-def memoize(fn):
-    known = dict()
+class Beverage(object):
+    name = ""
+    price = 0.0
+    type = "BEVERAGE"
 
-    @functools.wraps(fn)
-    def memoizer(*args):
-        if args not in known:
-            known[args] = fn(*args)
-        return known[args]
+    def get_price(self):
+        return self.price
 
-    return memoizer
+    def set_price(self, price):
+        self.price = price
 
-
-@memoize
-def nsum(n):
-    assert (n>=0), "n must be >= 0"
-    return 0 if n== 0 else n + nsum(n-1)
+    def get_name(self):
+        return self.name
 
 
-@memoize
-def fibonacci(n):
-    assert (n>=0), "n must be >= 0"
-    return n if n in (0, 1) else fibonacci(n-1) + fibonacci(n-2)
+class Coke(Beverage):
+    def __init__(self):
+        self.name = "coke"
+        self.price = 4.0
+
+
+class Milk(Beverage):
+
+    def __init__(self):
+        self.name = "milk"
+        self.price = 5.0
+
+
+class DrinkDecorator(metaclass=ABCMeta):
+
+    @abstractmethod
+    def get_name(self):
+        pass
+
+    @abstractmethod
+    def get_price(self):
+        pass
+
+
+class IceDecorator(DrinkDecorator):
+
+    def __init__(self, beverage):
+        self.beverage = beverage
+
+    def get_name(self):
+        return self.beverage.get_name() + " + ice"
+
+    def get_price(self):
+        return  self.beverage.get_price() + 0.3
+
+
+class SugarDecorator(DrinkDecorator):
+
+    def __init__(self, beverage):
+        self.beverage = beverage
+
+    def get_name(self):
+        return self.beverage.get_name() + " + sugar"
+
+    def get_price(self):
+        return self.beverage.get_price() + 0.5
 
 
 def main():
-    from timeit import Timer
-    measure = [
-        {"exec": "fibonacci(100)", "import": "fibonacci", "func": fibonacci},
-        {"exec": "nsum(200)", "import": "nsum", "func": nsum}
-    ]
-    for m in measure:
-        t = Timer(m["exec"], "from __main__ import {}".format(m["import"]))
-        print("name:{}, executing:{}, time:{}".format(m["func"].__name__, m["exec"], t.timeit()))
+    coke_cola = Coke()
+    print("Name:{}".format(coke_cola.get_name()))
+    print("Price:{}".format(coke_cola.get_price()))
+
+    ice_coke = IceDecorator(coke_cola)
+    print("Name:{}".format(ice_coke.get_name()))
+    print("Price:{}".format(ice_coke.get_price()))
 
 
 if __name__ == "__main__":
     main()
+
+
 

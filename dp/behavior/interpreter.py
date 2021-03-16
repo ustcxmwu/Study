@@ -1,5 +1,4 @@
-#  Copyright (c) 2021. Xiaomin Wu <xmwu@mail.ustc.edu.cn>
-#  All rights reserved.
+from abc import ABCMeta, abstractmethod
 
 
 class Context(object):
@@ -8,7 +7,8 @@ class Context(object):
         self.output = ""
 
 
-class AbstractExpression():
+class AbstractExpression(metaclass=ABCMeta):
+    @abstractmethod
     def interpret(self, context):
         pass
 
@@ -28,4 +28,3 @@ if __name__ == "__main__":
     c = [Expression(), NonterminalExpression(), Expression(), Expression()]
     for a in c:
         a.interpret(context)
-

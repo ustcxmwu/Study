@@ -1,7 +1,49 @@
-#  Copyright (c) 2021. Xiaomin Wu <xmwu@mail.ustc.edu.cn>
-#  All rights reserved.
+from abc import ABCMeta, abstractmethod
 
-class Frog(object):
+
+class Obstacle(metaclass=ABCMeta):
+    @abstractmethod
+    def __str__(self):
+        pass
+
+    @abstractmethod
+    def action(self):
+        pass
+
+
+class Character(metaclass=ABCMeta):
+    @abstractmethod
+    def __init__(self, name):
+        pass
+
+    @abstractmethod
+    def __str__(self):
+        pass
+
+    @abstractmethod
+    def interact_with(self, o: Obstacle):
+        pass
+
+
+class World(metaclass=ABCMeta):
+    @abstractmethod
+    def __init__(self, name):
+        pass
+
+    @abstractmethod
+    def __str__(self):
+        pass
+
+    @abstractmethod
+    def make_character(self):
+        pass
+
+    @abstractmethod
+    def make_obstacle(self):
+        pass
+
+
+class Frog(Character):
 
     def __init__(self, name):
         self.name = name
@@ -13,7 +55,7 @@ class Frog(object):
         print("{} the Frog encounters {} and {}!".format(self, obstacle, obstacle.action()))
 
 
-class Bug(object):
+class Bug(Obstacle):
 
     def __str__(self):
         return "a bug"
@@ -22,7 +64,7 @@ class Bug(object):
         return "eats it"
 
 
-class FrogWorld(object):
+class FrogWorld(World):
 
     def __init__(self, name):
         print(self)
@@ -38,7 +80,7 @@ class FrogWorld(object):
         return Bug()
 
 
-class Wizard(object):
+class Wizard(Character):
 
     def __init__(self, name):
         self.name = name
@@ -50,7 +92,7 @@ class Wizard(object):
         print("{} the Wizard battles against {} and {}".format(self, obstacle, obstacle.action()))
 
 
-class Ork(object):
+class Ork(Obstacle):
 
     def __str__(self):
         return "an evil ork"
@@ -59,7 +101,7 @@ class Ork(object):
         return "kills it"
 
 
-class WizardWorld(object):
+class WizardWorld(World):
 
     def __init__(self, name):
         print(self)
@@ -107,8 +149,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-
-
-
-

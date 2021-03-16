@@ -1,0 +1,26 @@
+@startuml
+
+abstract class Drink {
+    heat_water()
+    pot()
+    {abstract} add_condiments()
+    {abstract} brew()
+    drink()
+}
+
+class Tea {
+    make()
+    add_condiments()
+    brew()
+}
+
+class Coffee {
+    make()
+    add_condiments()
+    brew()
+}
+
+Drink <|-- Tea
+Drink <|-- Coffee
+
+@enduml

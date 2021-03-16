@@ -1,10 +1,10 @@
-#  Copyright (c) 2021. Xiaomin Wu <xmwu@mail.ustc.edu.cn>
-#  All rights reserved.
+from abc import ABCMeta, abstractmethod
+
 
 class Publisher(object):
 
     def __init__(self):
-        self.observers =[]
+        self.observers = []
 
     def add(self, observer):
         if observer not in self.observers:
@@ -46,13 +46,19 @@ class DefaultFormatter(Publisher):
             self.notify()
 
 
-class HexFormatter(object):
+class Oberver(metaclass=ABCMeta):
+    @abstractmethod
+    def notify(self, publisher: Publisher):
+        pass
+
+
+class HexFormatter(Oberver):
 
     def notify(self, publisher):
         print("{}: {} has now hex data = {}".format(type(self).__name__, publisher.name, hex(publisher.data)))
 
 
-class BinaryFormatter(object):
+class BinaryFormatter(Oberver):
 
     def notify(self, publisher):
         print("{}: {} has now bin data = {}".format(type(self).__name__, publisher.name, bin(publisher.data)))
@@ -89,7 +95,6 @@ def main():
     print()
     df.data = 15.8
     print(df)
-
 
 
 if __name__ == "__main__":

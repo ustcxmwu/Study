@@ -1,0 +1,42 @@
+@startuml
+
+abstract class Visitor {
+    {abstract} visitor_element_a(ea: ElementA)
+    {abstract} visitor_element_b(eb: ElementB)
+}
+
+class ConcreteVisitor1 {
+    visitor_element_a(ea: ElementA)
+    visitor_element_b(eb: ElementB)
+}
+
+class ConcreteVisitor2 {
+    visitor_element_a(ea: ElementA)
+    visitor_element_b(eb: ElementB)
+}
+
+Visitor <|-- ConcreteVisitor1
+Visitor <|-- ConcreteVisitor2
+
+abstract class Element {
+    {abstract} accept(visitor: Visitor)
+}
+
+class ElementA {
+    accept(visitor: Visitor)
+}
+
+class ElementB {
+    accept(visitor: Visitor)
+}
+
+Element <|-- ElementA
+Element <|-- ElementB
+
+class ObjectStructure
+
+ObjectStructure o-- ElementA
+ObjectStructure o-- ElementB
+
+
+@enduml

@@ -1,0 +1,35 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+abstract class State {
+    {abstract} write_program(w: Work)
+}
+
+class ForenoonState {
+    write_program(w: (w: Work)
+}
+
+class AfternoonState {
+    write_program(w: Work)
+}
+
+class EveningState {
+    write_program(w: Work)
+}
+
+class SleepState {
+    write_program(w: Work)
+}
+
+State <|-- ForenoonState
+State <|-- AfternoonState
+State <|-- EveningState
+State <|-- SleepState
+
+class Work {
+    State state
+    set_state(s: State)
+    write_program()
+}
+
+@enduml

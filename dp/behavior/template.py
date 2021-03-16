@@ -1,34 +1,64 @@
-#  Copyright (c) 2021. Xiaomin Wu <xmwu@mail.ustc.edu.cn>
-#  All rights reserved.
-
-from cowpy import cow
+from abc import ABCMeta, abstractmethod
 
 
-def dots_style(msg):
-    msg = msg.capitalize()
-    msg = msg.center(80, ".")
-    return msg
+class Drink(metaclass=ABCMeta):
+
+    def heat_water(self):
+        print("把水烧开")
+
+    def pot(self):
+        print("把水灌入壶中")
+
+    @abstractmethod
+    def add_condiments(self):
+        raise NotImplementedError
+
+    @abstractmethod
+    def brew(self):
+        raise NotImplementedError
+
+    def drink(self):
+        print("请慢用")
 
 
-def admire_style(msg):
-    msg = msg.upper()
-    return "!".join(msg)
+class Tea(Drink):
+
+    def make(self):
+        print("开始煮茶".center(80, "="))
+        self.heat_water()
+        self.pot()
+        self.add_condiments()
+        self.brew()
+        self.drink()
+
+    def add_condiments(self):
+        print("放入茶叶")
+
+    def brew(self):
+        print("用煮茶的方式煮茶，倒掉第一泡的水")
 
 
-def cow_style(msg):
-    msg = cow.milk_random_cow(msg)
-    return msg
+class Coffee(Drink):
 
+    def make(self):
+        print("开始煮咖啡".center(80, "="))
+        self.heat_water()
+        self.pot()
+        self.add_condiments()
+        self.drink()
 
-def generate_banner(msg, style=dots_style):
-    print("-- start of banner --")
-    print(style(msg))
-    print("-- end of banner --\n\n")
+    def add_condiments(self):
+        print("加入咖啡粉")
+
+    def brew(self):
+        print("依个人口味加入适量的糖和牛奶")
 
 
 def main():
-    msg = "happy coding"
-    [generate_banner(msg, style) for style in (dots_style, admire_style, cow_style)]
+    t = Tea()
+    t.make()
+    c = Coffee()
+    c.make()
 
 
 if __name__ == "__main__":
