@@ -1,0 +1,20 @@
+@startuml
+
+class SensitiveInfo {
+    read()
+    add(user)
+}
+
+class Info {
+    protected: SensitiveInfo
+    sceret
+    read()
+    add(user)
+}
+
+class Client
+
+Client *-- Info
+Info *-- SensitiveInfo
+
+@enduml

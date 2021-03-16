@@ -1,0 +1,37 @@
+@startuml
+
+abstract class Server {
+    {abstract} boot()
+    {abstract} kill(restart: bool)
+}
+
+class FileServer {
+    boot()
+    kill(restart: bool)
+    create_file(user, name, permissions)
+}
+
+class ProcessServer {
+    boot()
+    kill(restart: bool)
+    create_process(user, name)
+}
+
+Server <|-- FileServer
+Server <|-- ProcessServer
+
+class OperationSystem {
+    fs: FileServer
+    ps: ProcessServer
+    start()
+    create_file(user, name, permissions)
+    create_process(user, name)
+}
+
+OperationSystem *-- FileServer
+OperationSystem *-- ProcessServer
+
+class Client
+Client -- OperationSystem
+
+@enduml

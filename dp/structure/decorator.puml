@@ -1,0 +1,49 @@
+@startuml
+
+class Beverage {
+    name
+    price
+    type
+    get_name()
+    get_price()
+    set_price()
+}
+
+class Coke {
+    name
+    price
+    type
+}
+
+class Milk {
+    name
+    price
+    type
+}
+
+Beverage <|-- Coke
+Beverage <|-- Milk
+
+abstract class DrinkDecorator {
+    {abstract} get_name()
+    {abstract} get_price()
+}
+
+class IceDecorator {
+    beverage
+    get_name()
+    get_price()
+}
+
+class SugarDecorator {
+    beverage
+    get_name()
+    get_price()
+}
+
+DrinkDecorator <|-- IceDecorator
+DrinkDecorator <|-- SugarDecorator
+IceDecorator o-- Beverage
+SugarDecorator o-- Beverage
+
+@enduml

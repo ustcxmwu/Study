@@ -1,0 +1,21 @@
+@startuml
+
+abstract class Connector {
+    {abstract} parsed_data(filepath: str)
+}
+
+class JsonConnector {
+    parsed_data(filepath: str)
+}
+
+class XmlConnector {
+    parsed_data(filepath: str)
+}
+
+Connector <|-- JsonConnector
+Connector <|-- XmlConnector
+
+class Client
+Client *-- Connector
+
+@enduml

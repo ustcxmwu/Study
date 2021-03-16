@@ -1,0 +1,46 @@
+@startuml
+
+class Pizza {
+    name
+    dough
+    sauce
+    object[] topping
+    prepare_dough()
+}
+
+abstract class Builder {
+    {abstract} prepare_dough()
+    {abstract} add_sauce()
+    {abstract} add_topping()
+    {abstract} bake()
+}
+
+class MargaritaBuilder {
+    prepare_dough()
+    add_sauce()
+    add_topping()
+    bake()
+}
+
+class CreamyBaconBuilder {
+    prepare_dough()
+    add_sauce()
+    add_topping()
+    bake()
+}
+
+Builder <|-- MargaritaBuilder
+Builder <|-- CreamyBaconBuilder
+
+class Waiter {
+    Pizza: pizza
+    construct_pizza(builder: Builder)
+}
+
+Waiter *-- Pizza
+MargaritaBuilder -- Pizza
+CreamyBaconBuilder -- Pizza
+Waiter -- Builder
+
+
+@enduml

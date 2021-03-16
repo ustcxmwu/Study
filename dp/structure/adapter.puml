@@ -1,0 +1,38 @@
+@startuml
+
+class Synthesizer {
+    name
+    play()
+}
+
+class Adaptee
+
+class Human {
+    name
+    speak()
+}
+
+class Computer {
+    name
+    execute()
+}
+
+Adaptee <|-- Human
+Adaptee <|-- Synthesizer
+
+class Adapter {
+    adapt(obj: Adaptee, adapted_methods: dict)
+}
+
+class Client
+Client "1"*--"n" Adaptee
+Client *-- Computer
+Client o-- Adapter
+Adapter -- Adaptee
+
+
+
+
+
+
+@enduml

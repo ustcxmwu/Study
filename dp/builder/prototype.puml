@@ -1,0 +1,22 @@
+@startuml
+
+class Book {
+    name
+    authors
+    price
+}
+
+class ProtoType {
+    object[] objects
+    register(identifier: str, obj)
+    unregister(identifier: str, obj)
+    object clone(identifier: str, obj)
+}
+
+class Client
+
+Client "1"--"n" Book
+Client "1"*--"1" ProtoType
+
+
+@enduml

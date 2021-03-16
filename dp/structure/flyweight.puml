@@ -1,0 +1,19 @@
+@startuml
+enum TreeType {
+apple_tree
+cherry_tree
+peach_tree
+}
+
+class Tree {
+    pool: dict
+    __new__(tree_type: TreeType)
+    render(age, x, y)
+}
+
+class Client
+
+Client "1"*--"n" Tree
+Tree -- TreeType
+
+@enduml

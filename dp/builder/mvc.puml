@@ -1,0 +1,26 @@
+@startuml
+
+class QuoteModel {
+    get_quoto()
+}
+
+class QuoteTerminalView {
+    show(quote)
+    error(msg)
+    select_quote()
+}
+
+class QuoteTerminalController {
+    model: QuoteModel
+    view: QuoteTerminalView
+    run()
+}
+
+QuoteTerminalController *-- QuoteModel
+QuoteTerminalController *-- QuoteTerminalView
+
+class Client
+Client -- QuoteTerminalController
+
+
+@enduml

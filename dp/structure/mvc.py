@@ -6,7 +6,7 @@ quotes = ("A man is not complete until the is married. Then he is finished.",
           "Facts are stubborn things.")
 
 
-class QuteModel(object):
+class QuoteModel(object):
 
     def get_quote(self, n):
         try:
@@ -16,7 +16,7 @@ class QuteModel(object):
         return value
 
 
-class QuotoTerminalView(object):
+class QuoteTerminalView(object):
 
     def show(self, quote):
         print("And the quote is : '{}'".format(quote))
@@ -30,8 +30,8 @@ class QuotoTerminalView(object):
 
 class QuoteTerminalController(object):
     def __init__(self):
-        self.model = QuteModel()
-        self.view = QuotoTerminalView()
+        self.model = QuoteModel()
+        self.view = QuoteTerminalView()
 
     def run(self):
         valid_input = False

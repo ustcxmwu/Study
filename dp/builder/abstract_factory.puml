@@ -1,0 +1,65 @@
+@startuml
+
+abstract class Obstacle {
+    {abstract} action()
+}
+
+abstract class Character {
+    {abstract} interact_with(o: Obstacle)
+}
+
+abstract class World {
+    {abstract} make_obstacle()
+    {abstract} make_character()
+}
+
+class Frog {
+    interact_with(o: Obstacle)
+}
+
+class Bug {
+    action()
+}
+
+class FrogWorld {
+    Character make_character()
+    Character make_obstacle()
+}
+
+World <|-- FrogWorld
+Character <|-- Frog
+Obstacle <|-- Bug
+
+class Wizard {
+    interact_with(o: Obstacle)
+}
+
+class Ork {
+    action()
+}
+
+class WizardWorld {
+    Character make_character()
+    Obstacle make_obstacle()
+}
+
+Character <|-- Wizard
+Obstacle <|-- Ork
+World <|-- WizardWorld
+
+class GameEnvironment {
+    hero: Character
+    obstacle: Obstacle
+    play()
+}
+
+GameEnvironment *-- Character
+GameEnvironment *-- Obstacle
+
+FrogWorld "1"--"1" Frog
+FrogWorld "1"--"1" Bug
+
+WizardWorld "1"--"1" Wizard
+WizardWorld "1"--"1" Ork
+
+@enduml
