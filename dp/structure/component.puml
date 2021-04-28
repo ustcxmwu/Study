@@ -1,0 +1,24 @@
+@startuml
+
+class Client
+
+abstract class ComponentBase {
+    name
+    {abstract} add(obj: ComponentBase)
+    {abstract} remove(obj: ComponentBase)
+    {abstract} display(number)
+}
+
+class Node {
+    name
+    duty
+    ComponentBase[] children
+    add(obj: ComponentBase)
+    remove(obj: ComponentBase)
+    display(number)
+}
+
+ComponentBase <|-- Node
+Client --> ComponentBase
+
+@enduml

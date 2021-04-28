@@ -17,6 +17,7 @@ class Client
 
 Client "1"--"n" Book
 Client "1"*--"1" ProtoType
+ProtoType -- Book
 
 
 @enduml

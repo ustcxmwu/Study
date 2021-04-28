@@ -23,4 +23,7 @@ class Coffee {
 Drink <|-- Tea
 Drink <|-- Coffee
 
+class Client
+Client *-- Drink
+
 @enduml
