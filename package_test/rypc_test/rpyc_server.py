@@ -25,5 +25,5 @@ class TimeService(Service):
 
 
 if __name__ == '__main__':
-    s = ThreadedServer(service=TimeService, port=9000, auto_register=False)
+    s = ThreadedServer(service=TimeService(), port=9000, auto_register=False)
     s.start()
