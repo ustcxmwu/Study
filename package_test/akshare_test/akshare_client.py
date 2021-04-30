@@ -11,7 +11,6 @@ plt.rcParams["font.sans-serif"] = ["SimHei"]
 plt.rcParams["axes.unicode_minus"] = False
 
 
-
 class MyStrategy(bt.Strategy):
     """
     主策略程序
@@ -48,7 +47,7 @@ class MyStrategy(bt.Strategy):
 
 
 if __name__ == '__main__':
-    stock_hfq_df = ak.stock_zh_a_daily(symbol="sh603338", start_date="20100101", end_date="20210421", adjust="hfq")
+    stock_hfq_df = ak.stock_zh_a_daily(symbol="sh603338", adjust="hfq")
     cerebro = bt.Cerebro()  # 初始化回测系统
     start_date = datetime(2000, 1, 1)  # 回测开始时间
     end_date = datetime(2020, 4, 21)  # 回测结束时间
@@ -67,4 +66,10 @@ if __name__ == '__main__':
     print(f"总资金: {round(port_value, 2)}")
     print(f"净收益: {round(pnl, 2)}")
 
-    cerebro.plot(style='candlestick')  # 画图
+    from backtrader_plotting import Bokeh
+    from backtrader_plotting.schemes import Tradimo
+
+    b = Bokeh(style='bar', plot_mode='single', scheme=Tradimo())
+    cerebro.plot(b)
+
+    # cerebro.plot(style='candlestick')
