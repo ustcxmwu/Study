@@ -40,17 +40,17 @@ class MyStrategy(bt.Strategy):
         # 检查是否持仓
         if not self.position:  # 没有持仓
             if self.data_close[0] > self.sma[0]:  # 执行买入条件判断：收盘价格上涨突破20日均线
-                self.order = self.buy(size=100)  # 执行买入
+                self.order = self.buy(size=500)  # 执行买入
         else:
             if self.data_close[0] < self.sma[0]:  # 执行卖出条件判断：收盘价格跌破20日均线
-                self.order = self.sell(size=100)  # 执行卖出
+                self.order = self.sell(size=500)  # 执行卖出
 
 
 if __name__ == '__main__':
     stock_hfq_df = ak.stock_zh_a_daily(symbol="sh603338", adjust="hfq")
     cerebro = bt.Cerebro()  # 初始化回测系统
-    start_date = datetime(2000, 1, 1)  # 回测开始时间
-    end_date = datetime(2020, 4, 21)  # 回测结束时间
+    start_date = datetime(2021, 1, 1)  # 回测开始时间
+    end_date = datetime(2021, 4, 21)  # 回测结束时间
     data = bt.feeds.PandasData(dataname=stock_hfq_df, fromdate=start_date, todate=end_date)  # 加载数据
     cerebro.adddata(data)  # 将数据传入回测系统
     cerebro.addstrategy(MyStrategy)  # 将交易策略加载到回测系统中
@@ -66,10 +66,10 @@ if __name__ == '__main__':
     print(f"总资金: {round(port_value, 2)}")
     print(f"净收益: {round(pnl, 2)}")
 
-    from backtrader_plotting import Bokeh
-    from backtrader_plotting.schemes import Tradimo
+    # from backtrader_plotting import Bokeh
+    # from backtrader_plotting.schemes import Tradimo
+    #
+    # b = Bokeh(style='bar', plot_mode='single', scheme=Tradimo())
+    # cerebro.plot(b)
 
-    b = Bokeh(style='bar', plot_mode='single', scheme=Tradimo())
-    cerebro.plot(b)
-
-    # cerebro.plot(style='candlestick')
+    cerebro.plot(style='candlestick')
