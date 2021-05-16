@@ -17,7 +17,7 @@ if __name__ == '__main__':
     context = {
         "name": "许悦铭",
         "university": "苏州大学-东京大学",
-        "projects_file": "xuyueming.yml"
+        "projects_file": "projects.yml"
     }
     with open(context["projects_file"], mode='r', encoding="utf-8") as f:
         projects = yaml.safe_load(f)
