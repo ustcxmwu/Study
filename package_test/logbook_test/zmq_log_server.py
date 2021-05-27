@@ -9,7 +9,7 @@ import time
 if __name__ == '__main__':
     addr = 'tcp://127.0.0.1:5053'
     print("ZeroMQSubscriber begin with address {}".format(addr))
-    subscriber = ZeroMQSubscriber(addr)
+    subscriber = ZeroMQSubscriber(addr, multi=True)
 
     target_handlers = logbook.NestedSetup([
         StderrHandler(level=logbook.INFO,

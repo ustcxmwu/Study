@@ -10,7 +10,7 @@ if __name__ == '__main__':
     handler = ZeroMQHandler(addr, multi=True)
     time.sleep(0.25)
 
-    log = Logger("client1")
+    log = Logger("client2")
     handler.push_application()
     log.info("client1 start of program")
     log.info("client1 end of program")
