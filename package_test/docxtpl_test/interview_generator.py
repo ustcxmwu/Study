@@ -15,9 +15,8 @@ if __name__ == '__main__':
     jinja_env.filters["is_list"] = is_list
     tpl = DocxTemplate('interview_report_tpl.docx')
     context = {
-        "name": "许悦铭",
-        "university": "苏州大学-东京大学",
-        "projects_file": "projects.yml"
+        "name": "赵浩南",
+        "projects_file": "zhaohaonan.yml"
     }
     with open(context["projects_file"], mode='r', encoding="utf-8") as f:
         projects = yaml.safe_load(f)
