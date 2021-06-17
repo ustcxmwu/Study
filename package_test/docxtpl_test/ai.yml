@@ -63,7 +63,9 @@
 - question: On Policy 的policy gradient有什么可改进之处，或者说有什么缺陷？
   answer: 经典 policy gradient 的大部分时间花在 sample data 处，即当我们的 agent 与环境做了交互后，我们就要进行 policy model 的更新。但是对于一个回合我们仅能更新 policy model 一次，更新完后我们就要花时间去重新 collect data，然后才能再次进行如上的更新。
 - question: 怎么解决目标值总是太大的问题呢？
-  answer: 在 Double DQN 里面，选动作的 Q-function 跟算值的 Q-function 不是同一个。在原来的 DQN 里面，你穷举所有的 a，把每一个 a 都带进去，看哪一个 a 可以给你的 Q
-  值最高，那你就把那个 Q 值加上rt。但是在 Double DQN 里面，你有两个 Q-network 1)  第一个 Q-network Q 决定哪一个动作的 Q 值最大（你把所有的 a 带入 Q 中，看看哪一个 Q 值最大）。2) 你决定你的动作以后，你的 Q 值是用 Q′ 算出来的。
+  answer: 在 Double DQN 里面，选动作的 Q-function 跟算值的 Q-function 不是同一个。在原来的 DQN 里面，你穷举所有的 a，把每一个 a 都带进去，看哪一个 a 可以给你的 Q值最高，那你就把那个 Q 值加上rt。但是在 Double DQN 里面，你有两个 Q-network 1)  第一个 Q-network Q 决定哪一个动作的 Q 值最大（你把所有的 a 带入 Q 中，看看哪一个 Q 值最大）。2) 你决定你的动作以后，你的 Q 值是用 Q′ 算出来的。
+- question: 什么是 TD Target， 什么是 TD error
+  answer: R + gamma*Qmax, R + gamma*Qmax - Q
+
 
 
