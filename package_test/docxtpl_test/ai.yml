@@ -34,4 +34,36 @@
   answer:
     - 输入 MDP(S, A, R, P, gamma)
     - 输出 最优状态值函数 V 或者最优状态动作值函数Q, 和最优策略 pi
+- question: 什么是探索和利用 exploration and exploitation
+  answer:
+- question: DQN的三个tip是什么？
+  answer: 1) Target Network 2) Epsilon Greedy Exploration 3) Experience Replay
+- question: Experience Replay Buff 的优点
+  answer: 1) 提升样本的使用效率，提升训练效率；2) 从Replay Buff采样道德数据具有多样性，降低了样本的相关性。
+- question: DQN 和 Q-Learning有什么不同？
+  answer: 1) DQN 将 Q-Learning 与深度学习结合，采用深度网络来近似动作价值函数，而 Q-Learning 则是采用表格存储；2) DQN 采用了经验回放的训练方法，从历史数据中随机采样，而 Q-Learning 直接采用下一个状态的数据进行学习
+- question: rainbow 算法中试用的tip
+  answer: 1) DQN 2) DDQN 3) Prioritized DDQN 4) Dueling DDQN 5) A3C 6) Distributed DQN 7) Noisy DQN
+- question: 简述 Double DQN原理
+  answer: DQN 由于总是选择当前值函数最大的动作值函数来更新当前的动作值函数，因此存在着过估计问题。为了解耦这两个过程，Double DQN 使用了两个值网络，一个玩过用来执行动作选择，然后用另一个值函数对一个的动作值更新当前网络。
+- question: 演员-评论家算法（Actor-Critic Algorithm），演员和评论家指的是什么
+  answer: 演员 Actor 指的是策略函数 pi_theta(a|s) 即学习一个策略来得到尽量搞得回报；评论家 Critic 是指值函数 V^pi(s)，对当前策略的值函数进行估计，即评论演员的好坏。
+- question: 值迭代和策略迭代的区别?
+  answer: 策略迭代。它有两个循环，一个是在策略估计的时候，为了求当前策略的值函数需要迭代很多次。 另外一个是外面的大循环，就是策略评估，策略提升这个循环。值迭代算法则是一步到位，直接估计 最优值函数，因此没有策略提升环节。 参考值迭代算法
+- question: 求解马尔科夫决策过程都有哪些方法？有模型用什么方法？动态规划是怎么回事？
+  answer: 方法有：动态规划，时间差分，蒙特卡洛。 有模型可以使用动态规划方法。 动态规划是指：将一个问题拆分成几个子问题，分别求解这些子问题，然后获得原问题的解。 贝尔曼方程中为了求解一个状态的值函数，利用了其他状态的值函数，就是这种思想.
+- question: MC和TD分别是无偏估计吗？
+  answer: MC是无偏的，TD是有偏的
+- question: MC、TD谁的方差大，为什么？
+  answer: MC的方差大，以为TD使用了自举，实现一种类似于平滑的效果，所以估计的值函数方差小。
+- question: 什么是重要度采样？
+  answer: 使用另外一种数据分布，来逼近所求分布的一种方法，在强化学习中通常和蒙特卡罗方法结合使用
+- question: PPO 算法的改进
+  answer: 避免在使用 important sampling 时由于在 θ 下的 pθ (at|st) 跟在 θ′ 下的 pθ′ (at|st) 差太多，导致 important sampling 结果偏差较大而采取的算法。具体来说就是在 training 的过程中增加一个 constrain，这个 constrain 对应着 θ 跟 θ′ output 的 action 的 KL divergence，来衡量 θ 与 θ′的相似程度。
+- question: On Policy 的policy gradient有什么可改进之处，或者说有什么缺陷？
+  answer: 经典 policy gradient 的大部分时间花在 sample data 处，即当我们的 agent 与环境做了交互后，我们就要进行 policy model 的更新。但是对于一个回合我们仅能更新 policy model 一次，更新完后我们就要花时间去重新 collect data，然后才能再次进行如上的更新。
+- question: 怎么解决目标值总是太大的问题呢？
+  answer: 在 Double DQN 里面，选动作的 Q-function 跟算值的 Q-function 不是同一个。在原来的 DQN 里面，你穷举所有的 a，把每一个 a 都带进去，看哪一个 a 可以给你的 Q
+  值最高，那你就把那个 Q 值加上rt。但是在 Double DQN 里面，你有两个 Q-network 1)  第一个 Q-network Q 决定哪一个动作的 Q 值最大（你把所有的 a 带入 Q 中，看看哪一个 Q 值最大）。2) 你决定你的动作以后，你的 Q 值是用 Q′ 算出来的。
+
 

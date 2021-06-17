@@ -1,5 +1,6 @@
 import pprint as pp
 from random import sample
+from easydict import EasyDict as edict
 
 import yaml
 from docxtpl import DocxTemplate
@@ -14,10 +15,14 @@ if __name__ == '__main__':
     jinja_env = Environment()
     jinja_env.filters["is_list"] = is_list
     tpl = DocxTemplate('interview_report_tpl.docx')
-    context = {
-        "name": "赵浩南",
-        "projects_file": "zhaohaonan.yml"
-    }
+    context = edict({
+        "type": "社招",
+        "name": "朱怡剑",
+        "university": "武汉大学本科",
+        "major": "物理学类",
+        "projects_file": "zhuyijian.yml"
+    })
+
     with open(context["projects_file"], mode='r', encoding="utf-8") as f:
         projects = yaml.safe_load(f)
     # pp.pprint(projects)
@@ -30,4 +35,4 @@ if __name__ == '__main__':
     context["program_questions"] = sample(program_questions, min(10, len(program_questions)))
     pp.pprint(context)
     tpl.render(context, jinja_env=jinja_env)
-    tpl.save('./out/{}_面试情况.docx'.format(context["name"]))
+    tpl.save('./out/{}_{}_面试情况.docx'.format(context.type, context.name))

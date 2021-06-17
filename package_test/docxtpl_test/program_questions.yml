@@ -27,14 +27,14 @@
 - question: numpy ndarray 和 pandas dataframe哪个更高效，为什么？
   answer: ndarray, 数据是同质的
 - question: python 中类方法，实例方法，静态方法有什么区别
-  answer: |-
+  answer: >-
     类方法: 是类对象的方法，在定义时需要在上方使用 @classmethod 进行装饰,形参为cls，表示类对象，类对象和实例对象都可调用
     类实例方法: 是类实例化对象的方法,只有实例对象可以调用，形参为self,指代对象本身;
     静态方法: 是一个任意函数，在其上方使用 @staticmethod 进行装饰，可以用对象直接调用，静态方法实际上跟该类没有太大关系
 - question: 函数调用参数的传递方式是值传递还是引用传递
   answer: 传对象，不可变对象传值，可变对象传引用
 - question: python 中的数据类型有哪些，哪些是可变的，哪些是不可变的？
-  answer: |-
+  answer: >-
     不可变：Numberic(int, float), String, Tuple
     可变：Set, List, Dict
 - question: 单个指针删除链表倒数第k个节点？
