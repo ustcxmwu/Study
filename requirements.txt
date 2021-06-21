@@ -120,7 +120,7 @@ libarchive-c==2.9
 llvmlite==0.36.0
 locket==0.2.1
 Logbook==1.5.3
-lxml==4.5.1
+lxml==4.6.3
 Markdown==3.2.2
 MarkupSafe==2.0.1
 matplotlib==3.2.1
