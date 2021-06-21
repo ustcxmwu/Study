@@ -1,11 +1,13 @@
-import gym, os
 from itertools import count
+
+import gym
+import numpy as np
+import os
 import torch
 import torch.nn as nn
-import torch.optim as optim
 import torch.nn.functional as F
+import torch.optim as optim
 from torch.distributions import Categorical
-
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 env = gym.make("CartPole-v0").unwrapped
@@ -59,10 +61,11 @@ def compute_returns(next_value, rewards, masks, gamma=0.99):
     return returns
 
 
-def trainIters(actor, critic, n_iters):
+def trainIters(actor, critic):
     optimizerA = optim.Adam(actor.parameters())
     optimizerC = optim.Adam(critic.parameters())
-    for iter in range(n_iters):
+    scores = []
+    while True:
         state = env.reset()
         log_probs = []
         values = []
@@ -90,9 +93,9 @@ def trainIters(actor, critic, n_iters):
             state = next_state
 
             if done:
-                print('Iteration: {}, Score: {}'.format(iter, i))
+                scores.append(i)
+                print('Iteration: {}, Score: {}'.format(len(scores), i))
                 break
-
 
         next_state = torch.FloatTensor(next_state).to(device)
         next_value = critic(next_state)
@@ -113,6 +116,10 @@ def trainIters(actor, critic, n_iters):
         critic_loss.backward()
         optimizerA.step()
         optimizerC.step()
+
+        if len(scores) > 50:
+            if np.mean(scores[-50:]) > 195:
+                break
     torch.save(actor, 'model/actor.pkl')
     torch.save(critic, 'model/critic.pkl')
     env.close()
@@ -129,7 +136,7 @@ if __name__ == '__main__':
         print('Critic Model loaded')
     else:
         critic = Critic(state_size, action_size).to(device)
-    trainIters(actor, critic, n_iters=2000)
+    trainIters(actor, critic)
 
 
 
