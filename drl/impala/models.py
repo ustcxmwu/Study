@@ -43,8 +43,8 @@ class MlpValueFn(nn.Module):
                 nn.ReLU(),
                 nn.Linear(hidden_dim, 1),
             )
-            .to(device)
-            .to(dtype)
+                .to(device)
+                .to(dtype)
         )
 
     def forward(self, observation: torch.Tensor) -> torch.Tensor:
