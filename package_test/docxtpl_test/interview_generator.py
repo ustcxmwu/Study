@@ -17,10 +17,10 @@ if __name__ == '__main__':
     tpl = DocxTemplate('interview_report_tpl.docx')
     context = edict({
         "type": "社招",
-        "name": "郭中正",
-        "university": "南京工程学院（过程装备与控制工程）本科-哈尔滨理工大学（控制工程）研究生",
+        "name": "高凯戈",
+        "university": "哈工大-纽约大学布法罗分校",
         # "major": "物理学类",
-        "projects_file": "guozhongzheng.yml"
+        "projects_file": "gaokaige.yml"
     })
 
     with open(context["projects_file"], mode='r', encoding="utf-8") as f:
