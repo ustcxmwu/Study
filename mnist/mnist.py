@@ -116,7 +116,7 @@ def train(mnist):
     with tf.Session() as sess:
         tf.global_variables_initializer().run()
         validate_feed = {x: mnist.validation.images, y_: mnist.validation.labels}
-        test_feed = {x: mnist.test.images, y_: mnist.test.labels}
+        test_feed = {x: mnist.evaluate.images, y_: mnist.evaluate.labels}
 
         # 循环的训练神经网络。
         for i in range(TRAINING_STEPS):

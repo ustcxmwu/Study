@@ -31,9 +31,7 @@ class Learner(object):
         self.hp = hparams
         self.policy = policy
         self.value_fn = value_fn
-        self.optimizer = torch.optim.Adam(
-            [*self.policy.parameters(), *self.value_fn.parameters()], lr=self.hp.lr
-        )
+        self.optimizer = torch.optim.Adam([*self.policy.parameters(), *self.value_fn.parameters()], lr=self.hp.lr)
         self.scheduler = torch.optim.lr_scheduler.LambdaLR(self.optimizer, lambda epoch: 0.95)
         self.timeout = timeout
         self.q = q
@@ -112,9 +110,7 @@ class Learner(object):
 
                     # computing v trace targets recursively
                     with torch.no_grad():
-                        imp_sampling = torch.exp(
-                            curr_log_probs - traj_log_probs
-                        ).squeeze(1)
+                        imp_sampling = torch.exp(curr_log_probs - traj_log_probs).squeeze(1)
                         rho = torch.clamp(imp_sampling, max=self.hp.rho_bar)
                         c = torch.clamp(imp_sampling, max=self.hp.c_bar)
                         delta = rho * (r + self.hp.gamma * v[1:] - v[:1])
@@ -164,12 +160,8 @@ class Learner(object):
                 # self.value_fn_optimizer.zero_grad()
                 self.optimizer.zero_grad()
                 loss.backward()
-                torch.nn.utils.clip_grad_norm_(
-                    self.policy.parameters(), self.hp.max_norm
-                )
-                torch.nn.utils.clip_grad_norm_(
-                    self.value_fn.parameters(), self.hp.max_norm
-                )
+                torch.nn.utils.clip_grad_norm_(self.policy.parameters(), self.hp.max_norm)
+                torch.nn.utils.clip_grad_norm_(self.value_fn.parameters(), self.hp.max_norm)
                 self.optimizer.step()
                 self.scheduler.step()
                 # self.policy_optimizer.step()
@@ -204,18 +196,17 @@ class Learner(object):
 
                 # log to tensorboard
                 if self.log_path is not None:
-                    writer.add_scalar("learner_{}/rewards/batch_mean_reward".format(self.id), reward,
-                                      update_count + 1, )
-                    writer.add_scalar("learner_{}/loss/policy_loss".format(self.id), policy_loss, update_count + 1, )
-                    writer.add_scalar("learner_{}/loss/value_fn_loss".format(self.id), value_fn_loss,
-                                      update_count + 1, )
+                    writer.add_scalar("learner_{}/cartpole".format(self.id), traj_len, update_count + 1)
+                    writer.add_scalar("learner_{}/rewards/batch_mean_reward".format(self.id), reward, update_count + 1)
+                    writer.add_scalar("learner_{}/loss/policy_loss".format(self.id), policy_loss, update_count + 1)
+                    writer.add_scalar("learner_{}/loss/value_fn_loss".format(self.id), value_fn_loss, update_count + 1)
                     writer.add_scalar("learner_{}/loss/policy_entropy".format(self.id), policy_entropy,
-                                      update_count + 1, )
+                                      update_count + 1)
                     writer.add_scalar("learner_{}/loss/total_loss".format(self.id), loss, update_count + 1)
 
                 # save model weights every given interval
                 if (update_count + 1) % self.hp.save_every == 0:
-                    path = self.log_path / Path("IMPALA_{}_l{}_{}.pt".format(env.name, self.id, update_count))
+                    path = self.log_path / Path("IMPALA_{}_l{}_{}.pt".format(self.hp.env_name, self.id, update_count))
                     self.save(path)
                     print("[learner_{}] Saved model weights at update {} to {}".format(self.id, update_count, path))
 

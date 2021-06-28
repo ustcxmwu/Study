@@ -13,7 +13,6 @@ class MlpPolicy(nn.Module):
         self.model = (
             nn.Sequential(
                 nn.Linear(state_size, hidden_size),
-                nn.Dropout(p=0.8),
                 nn.ReLU(),
                 nn.Linear(hidden_size, action_size)
             ).to(device).to(dtype)
@@ -29,7 +28,6 @@ class MlpPolicy(nn.Module):
             action = torch.argmax(logits)
         else:
             action = torch.multinomial(F.softmax(logits, dim=-1), num_samples=1)
-
         return action, logits
 
 
@@ -39,7 +37,6 @@ class MlpValueFn(nn.Module):
         self.model = (
             nn.Sequential(
                 nn.Linear(obs_dim, hidden_dim),
-                nn.Dropout(p=0.8),
                 nn.ReLU(),
                 nn.Linear(hidden_dim, 1),
             )

@@ -3,6 +3,7 @@ from pathlib import Path
 import gym
 
 import torch.multiprocessing as mp
+
 mp.set_sharing_strategy('file_system')
 
 import utils
@@ -11,24 +12,22 @@ from learner import Learner
 from models import MlpPolicy, MlpValueFn
 
 hparams = utils.Hyperparameters(
-    max_updates=50,
-    policy_hidden_dims=128,
-    value_fn_hidden_dims=128,
+    max_updates=1000,
+    policy_hidden_dims=256,
+    value_fn_hidden_dims=256,
     batch_size=32,
     gamma=0.99,
     rho_bar=1.0,
     c_bar=1.0,
-    # policy_lr=1e-3,
-    # value_fn_lr=1e-3,
     lr=1e-3,
     policy_loss_c=1,
     v_loss_c=0.5,
     entropy_c=0.0006,
     max_timesteps=1000,
     queue_lim=8,
-    max_norm=10,
+    max_norm=250,
     n_actors=3,
-    env_name="CartPole-v1",  # "RacecarBulletEnv-v0",
+    env_name="CartPole-v1",
     log_path="./logs/",
     save_every=50,
     eval_every=2,
@@ -48,7 +47,7 @@ def train():
     print("[main] {}\n".format(hparams))
 
     if hparams.log_path is not None:
-        log_path = Path(Path(hparams.log_path) / "{}".format(start_time.strftime("%d%m%Y%H%M%S")))
+        log_path = Path(Path(hparams.log_path) / "{}_{}".format(hparams.env_name, start_time.strftime("%Y%m%d-%H%M%S")))
         log_path.mkdir(parents=True, exist_ok=True)
         with open(Path(log_path / "hyperparameters.txt"), "w+") as f:
             f.write("{hparams}")
@@ -74,9 +73,7 @@ def train():
     actors = []
     for i in range(hparams.n_actors):
         policy = MlpPolicy(observation_size, action_size, hparams.policy_hidden_dims)
-        actors.append(
-            Actor(i + 1, hparams, policy, learner, q, update_counter, log_path)
-        )
+        actors.append(Actor(i + 1, hparams, policy, learner, q, update_counter, log_path))
 
     print("[main] Initialized")
 
@@ -96,9 +93,7 @@ def train():
     for a in actors:
         a.join()
 
-    print(
-        "[main] Completed in {(datetime.datetime.now() - start_time).seconds} seconds"
-    )
+    print("[main] Completed in {} seconds".format((datetime.datetime.now() - start_time).seconds))
 
 
 if __name__ == '__main__':
