@@ -1,5 +1,5 @@
-from rl_mofan.maze_env import Maze
-from rl_mofan.qlearning_sarsa import QLearningTable, SarsaLambdaTable, SarsaTable
+from drl.rl_mofan.maze_env import Maze
+from drl.rl_mofan.qlearning_sarsa import SarsaLambdaTable
 import time
 
 
