@@ -1,24 +1,22 @@
-import abc #利用abc模块实现抽象类
-import numpy as np
-import math
+import abc  # 利用abc模块实现抽象类
 from typing import Type
 
 
 class AllFile(metaclass=abc.ABCMeta):
-    all_type='file'
+    all_type = 'file'
 
-    @abc.abstractmethod #定义抽象方法，无需实现功能
+    @abc.abstractmethod  # 定义抽象方法，无需实现功能
     def read(self):
         '子类必须定义读功能'
         pass
 
-    @abc.abstractmethod #定义抽象方法，无需实现功能
+    @abc.abstractmethod  # 定义抽象方法，无需实现功能
     def write(self):
         '子类必须定义写功能'
         pass
 
 
-class Txt(AllFile): #子类继承抽象类，但是必须定义read和write方法
+class Txt(AllFile):
     def read(self):
         print('文本数据的读取方法')
 
@@ -26,7 +24,7 @@ class Txt(AllFile): #子类继承抽象类，但是必须定义read和write方�
         print('文本数据的读取方法')
 
 
-class Sata(AllFile): #子类继承抽象类，但是必须定义read和write方法
+class Sata(AllFile):
     def read(self):
         print('硬盘数据的读取方法')
 
@@ -34,7 +32,7 @@ class Sata(AllFile): #子类继承抽象类，但是必须定义read和write方�
         print('硬盘数据的读取方法')
 
 
-class Process(AllFile): #子类继承抽象类，但是必须定义read和write方法
+class Process(AllFile):
     def read(self):
         print('进程数据的读取方法')
 
@@ -42,20 +40,13 @@ class Process(AllFile): #子类继承抽象类，但是必须定义read和write�
         print('进程数据的读取方法')
 
 
-def np_array():
-    a = np.array([np.cos(np.pi/2), np.sin(np.pi/2)])*3
-    print(a)
-    b = np.array([1, 2, 3, 4])
-    b[0:2] = np.array([5, 6])
-    print(b)
-
-def dis(a:Type[AllFile]):
+def dis(a: Type[AllFile]):
     a.read()
     a.write()
 
 
 if __name__ == '__main__':
-    wenbenwenjian=Txt()
+    wenbenwenjian = Txt()
     dis(wenbenwenjian)
     # yingpanwenjian=Sata()
     # jinchengwenjian=Process()
