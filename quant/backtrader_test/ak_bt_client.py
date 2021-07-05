@@ -1,14 +1,26 @@
-#  Copyright (c) 2021. Xiaomin Wu <xmwu@mail.ustc.edu.cn>
-#  All rights reserved.
-
 from datetime import datetime
 
-import backtrader as bt
-import matplotlib.pyplot as plt
-import akshare as ak
+import backtrader as bt  # 升级到最新版
+import matplotlib.pyplot as plt  # 由于 Backtrader 的问题，此处要求 pip install matplotlib==3.2.2
+import akshare as ak  # 升级到最新版
+import pandas as pd
 
 plt.rcParams["font.sans-serif"] = ["SimHei"]
 plt.rcParams["axes.unicode_minus"] = False
+
+# 利用 AKShare 获取股票的后复权数据，这里只获取前 6 列
+stock_hfq_df = ak.stock_zh_a_hist(symbol="000001", adjust="hfq").iloc[:, :6]
+# 处理字段命名，以符合 Backtrader 的要求
+stock_hfq_df.columns = [
+    'date',
+    'open',
+    'close',
+    'high',
+    'low',
+    'volume',
+]
+# 把 date 作为日期索引，以符合 Backtrader 的要求
+stock_hfq_df.index = pd.to_datetime(stock_hfq_df['date'])
 
 
 class MyStrategy(bt.Strategy):
@@ -40,17 +52,16 @@ class MyStrategy(bt.Strategy):
         # 检查是否持仓
         if not self.position:  # 没有持仓
             if self.data_close[0] > self.sma[0]:  # 执行买入条件判断：收盘价格上涨突破20日均线
-                self.order = self.buy(size=500)  # 执行买入
+                self.order = self.buy(size=100)  # 执行买入
         else:
             if self.data_close[0] < self.sma[0]:  # 执行卖出条件判断：收盘价格跌破20日均线
-                self.order = self.sell(size=500)  # 执行卖出
+                self.order = self.sell(size=100)  # 执行卖出
 
 
 if __name__ == '__main__':
-    stock_hfq_df = ak.stock_zh_a_daily(symbol="sh603338", adjust="hfq")
     cerebro = bt.Cerebro()  # 初始化回测系统
-    start_date = datetime(2021, 1, 1)  # 回测开始时间
-    end_date = datetime(2021, 4, 21)  # 回测结束时间
+    start_date = datetime(1991, 4, 3)  # 回测开始时间
+    end_date = datetime(2020, 6, 16)  # 回测结束时间
     data = bt.feeds.PandasData(dataname=stock_hfq_df, fromdate=start_date, todate=end_date)  # 加载数据
     cerebro.adddata(data)  # 将数据传入回测系统
     cerebro.addstrategy(MyStrategy)  # 将交易策略加载到回测系统中
@@ -66,10 +77,4 @@ if __name__ == '__main__':
     print(f"总资金: {round(port_value, 2)}")
     print(f"净收益: {round(pnl, 2)}")
 
-    # from backtrader_plotting import Bokeh
-    # from backtrader_plotting.schemes import Tradimo
-    #
-    # b = Bokeh(style='bar', plot_mode='single', scheme=Tradimo())
-    # cerebro.plot(b)
-
-    cerebro.plot(style='candlestick')
+    cerebro.plot(style='candlestick')  # 画图
