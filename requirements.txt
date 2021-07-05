@@ -15,7 +15,7 @@ keras
 line_profiler
 Logbook
 lxml
-matplotlib
+matplotlib==3.2.2
 mock
 msgpack_python
 munch
