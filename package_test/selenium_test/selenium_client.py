@@ -1,6 +1,3 @@
-#  Copyright (c) 2020. Xiaomin Wu <xmwu@mail.ustc.edu.cn>
-#  All rights reserved.
-
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.firefox.firefox_binary import FirefoxBinary

@@ -7,6 +7,9 @@ if __name__ == '__main__':
     print(famous.wives_for['bill'])
     print(famous.husbands_for['hillary'])
 
-    famous.husbands['barack'] = 'michelle'
-    del famous.wives['hillary']
+    famous.wives_for['barack'] = 'michelle'
+    print(famous)
+    del famous.husbands_for['hillary']
+    print(famous)
+    print(famous.pop("barack"))
     print(famous)
