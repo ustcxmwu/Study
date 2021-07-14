@@ -6,6 +6,7 @@ from datetime import datetime
 import backtrader as bt
 import matplotlib.pyplot as plt
 import akshare as ak
+import pandas as pd
 
 plt.rcParams["font.sans-serif"] = ["SimHei"]
 plt.rcParams["axes.unicode_minus"] = False
@@ -47,7 +48,18 @@ class MyStrategy(bt.Strategy):
 
 
 if __name__ == '__main__':
-    stock_hfq_df = ak.stock_zh_a_daily(symbol="sh603338", adjust="hfq")
+    # stock_hfq_df = ak.stock_zh_a_hist(symbol="603338", adjust="hfq").iloc[:, :6]
+    stock_hfq_df = ak.stock_zh_a_daily(symbol="sh600538", adjust="hfq").iloc[:, :6]
+    stock_hfq_df.columns = [
+        'date',
+        'open',
+        'close',
+        'high',
+        'low',
+        'volume',
+    ]
+    stock_hfq_df.index = pd.to_datetime(stock_hfq_df['date'])
+
     cerebro = bt.Cerebro()  # 初始化回测系统
     start_date = datetime(2021, 1, 1)  # 回测开始时间
     end_date = datetime(2021, 7, 2)  # 回测结束时间
