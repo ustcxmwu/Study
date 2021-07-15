@@ -60,7 +60,7 @@ class MyStrategy(bt.Strategy):
 
 if __name__ == '__main__':
     cerebro = bt.Cerebro()  # 初始化回测系统
-    start_date = datetime(1991, 4, 3)  # 回测开始时间
+    start_date = datetime(2019, 4, 3)  # 回测开始时间
     end_date = datetime(2020, 6, 16)  # 回测结束时间
     data = bt.feeds.PandasData(dataname=stock_hfq_df, fromdate=start_date, todate=end_date)  # 加载数据
     cerebro.adddata(data)  # 将数据传入回测系统
