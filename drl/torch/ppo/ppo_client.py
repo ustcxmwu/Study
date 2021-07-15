@@ -84,7 +84,7 @@ class PPO(nn.Module):
 
 
 def main():
-    env = gym.make('CartPole-v1')
+    env = gym.make('CartPole-v0')
     model = PPO()
     score = 0.0
     print_interval = 20
