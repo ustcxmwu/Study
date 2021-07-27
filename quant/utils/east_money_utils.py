@@ -40,14 +40,12 @@ def parse_resp(resp: Response, key=None):
 def load_config():
     with open("config.yaml", mode='r') as f:
         config = yaml.safe_load(f)
-    return edict(config)
-
-
-def get_headers(config):
+    config = edict(config)
     headers = {'content-type': 'application/json',
                'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.107 Safari/537.36',
                'Referer': config.Referer}
-    return headers
+    cookies_jar = browser_cookie3.chrome()
+    return config, headers, cookies_jar
 
 
 def parse_cookies(cookie: str):
@@ -61,13 +59,10 @@ def parse_cookies(cookie: str):
 
 
 def get_groups():
-    config = load_config()
+    config, headers, cj = load_config()
     url = config.urls.webouter + config.urls.groups
     url = url.format(config.appkey)
-    headers = get_headers(config)
-    cookies = parse_cookies(config.cookie)
-
-    resp = requests.get(url, headers=headers, cookies=cookies)
+    resp = requests.get(url, headers=headers, cookies=cj)
 
     _, value = parse_resp(resp, key='ginfolist')
     return value
@@ -84,9 +79,7 @@ def get_group_id(gname: str):
 def add_group(gname: str):
     if get_group_id(gname) is not None:
         raise ValueError("自选组: {}已存在,请更换名字后继续.".format(gname))
-    config = load_config()
-    headers = get_headers(config)
-    cookies = parse_cookies(config.cookie)
+    config, headers, cookies = load_config()
     url = config.urls.webouter + config.urls.add_group
     url = url.format(config.appkey, gname)
     resp = requests.get(url, headers=headers, cookies=cookies)
@@ -100,9 +93,7 @@ def rename_group(old_name: str, new_name: str):
     gid = get_group_id(old_name)
     if gid is None:
         raise ValueError("自选组: {} 不存在".format(old_name))
-    config = load_config()
-    headers = get_headers(config)
-    cookies = parse_cookies(config.cookie)
+    config, headers, cookies = load_config()
     url = config.urls.webouter + config.urls.rename_group
     url = url.format(config.appkey, gid, new_name)
     resp = requests.get(url, headers=headers, cookies=cookies)
@@ -116,9 +107,7 @@ def del_group(gname: str):
     gid = get_group_id(gname)
     if gid is None:
         raise ValueError("自选组: {} 不存在, 无需删除".format(gname))
-    config = load_config()
-    headers = get_headers(config)
-    cookies = parse_cookies(config.cookie)
+    config, headers, cookies = load_config()
     url = config.urls.webouter + config.urls.del_group
     url = url.format(config.appkey, gid)
     resp = requests.get(url, headers=headers, cookies=cookies)
@@ -132,9 +121,7 @@ def get_stocks(gname: str):
     gid = get_group_id(gname)
     if gid is None:
         raise ValueError("自选组: {} 不存在".format(gname))
-    config = load_config()
-    headers = get_headers(config)
-    cookies = parse_cookies(config.cookie)
+    config, headers, cookies = load_config()
     url = config.urls.webouter + config.urls.stocks
     url = url.format(config.appkey, gid)
     resp = requests.get(url, headers=headers, cookies=cookies)
@@ -148,9 +135,7 @@ def add_stock(code, gname: str):
     gid = get_group_id(gname)
     if gid is None:
         raise ValueError("自选组: {} 不存在".format(gname))
-    config = load_config()
-    headers = get_headers(config)
-    cookies = parse_cookies(config.cookie)
+    config, headers, cookies = load_config()
     url = config.urls.webouter + config.urls.add_to_group
     codes = to_eastmoney_code(code)
     url = url.format(config.appkey, gid, codes)
@@ -165,9 +150,7 @@ def del_from_group(code: str, gname: str):
     gid = get_group_id(gname)
     if gid is None:
         raise ValueError("自选组: {} 不存在".format(gname))
-    config = load_config()
-    headers = get_headers(config)
-    cookies = parse_cookies(config.cookie)
+    config, headers, cookies = load_config()
     url = config.urls.webouter + config.urls.del_from_group
     codes = to_eastmoney_code(code)
     url = url.format(config.appkey, gid, codes)
@@ -185,9 +168,7 @@ def mod_stock_group(code: str, old_group_name: str, new_group_name: str):
         raise ValueError("自选组: {} 不存在".format(old_group_name))
     if gid2 is None:
         raise ValueError("自选组: {} 不存在".format(new_group_name))
-    config = load_config()
-    headers = get_headers(config)
-    cookies = parse_cookies(config.cookie)
+    config, headers, cookies = load_config()
     url = config.urls.webouter + config.urls.mod_group
     codes = to_eastmoney_code(code)
     url = url.format(config.appkey, gid, gid2, codes)
@@ -204,9 +185,7 @@ def add_qingze_group(gname: str, filename: str):
         del_group(gname)
     add_group(gname)
     gid = get_group_id(gname)
-    config = load_config()
-    headers = get_headers(config)
-    cookies = parse_cookies(config.cookie)
+    config, headers, cookies = load_config()
     urlf = config.urls.webouter + config.urls.add_to_group
     qingze_codes = list()
     with open(filename, mode='r') as f:
