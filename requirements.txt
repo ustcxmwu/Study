@@ -2,6 +2,7 @@ akshare
 backtrader
 beautifulsoup4
 bidict
+browser-cookie3
 Cerberus
 cowpy
 docxtpl

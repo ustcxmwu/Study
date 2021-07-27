@@ -1,5 +1,6 @@
 import json
 
+import browser_cookie3
 import requests
 import yaml
 from easydict import EasyDict as edict
@@ -50,11 +51,13 @@ def get_headers(config):
 
 
 def parse_cookies(cookie: str):
-    cookies = dict()
-    for line in cookie.split("; "):
-        k, v = line.split("=")
-        cookies[k] = v
-    return cookies
+    # cookies = dict()
+    # for line in cookie.split("; "):
+    #     k, v = line.split("=")
+    #     cookies[k] = v
+    # return cookies
+    cj = browser_cookie3.chrome()  # firefox可以替换为browser_cookie3.firefox()
+    return cj
 
 
 def get_groups():
