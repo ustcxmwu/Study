@@ -16,11 +16,11 @@ if __name__ == '__main__':
     jinja_env.filters["is_list"] = is_list
     tpl = DocxTemplate('interview_report_tpl.docx')
     context = edict({
-        "type": "社招",
-        "name": "黄圣凯",
-        "university": "重庆邮电(计算机)-日本电气通信大学(计算机)",
+        "type": "校招",
+        "name": "秦昊杰",
+        "university": "四川大学(测控技术与仪器)-四川大学(计算机科学与技术)",
         # "major": "物理学类",
-        "projects_file": "huangshengkai.yml"
+        "projects_file": "qinhaojie.yml"
     })
 
     with open(context["projects_file"], mode='r', encoding="utf-8") as f:

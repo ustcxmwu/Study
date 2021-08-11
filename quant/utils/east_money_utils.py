@@ -204,10 +204,11 @@ def add_qingze_group(gname: str, filename: str):
 
 if __name__ == '__main__':
     print(get_groups())
-    # print(add_qingze_group("清则洞察", "洞察导入.txt"))
+    # print(del_group("清则洞察"))
+    print(add_qingze_group("清则洞察", "清则洞察66.txt"))
     # print(add_qingze_group("清则ETF", "ETF导入.txt"))
     # print(add_qingze_group("清则好公司1", "好公司导入.txt"))
-    print(get_stocks("清则好公司"))
+    # print(get_stocks("清则好公司"))
     print(get_groups())
     # print(get_stocks("xx"))
     # print(get_group_id("清则群"))
