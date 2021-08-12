@@ -1,10 +1,26 @@
-- name: project1
-  keywords: key1, key2, key3
-  tech: c++, python
-  duty: duty
-  result: result
-- name: project2
-  keywords: key1, key2, key3
-  tech: c++, python
-  duty: duty
-  result: result
+- name: 多智能体博弈模拟 2020.5 - 至今
+  keywords: 了解多智能体领域的强化学习方法， 熟悉公司代码框架， 了解各接口使用规范
+  #  tech:
+  duty:
+  #  result:
+- name: 通过 MPIIGaze 数据集进行基于外表的视线估计 2020.5 - 至今
+  keywords: 了解多智能体领域的强化学习方法， 熟悉公司代码框架， 了解各接口使用规范
+  #  tech:
+  duty: >-
+    1) 预处理 MPIIGaze 数据集，实现 LeNet 模型和 ResNet 模型的训练测试.
+    2) 对比 LeNet 模型和 ResNet 模型的结果.
+  #result:
+- name: 文本分类模型的研究与实现
+  keywords: 了解多智能体领域的强化学习方法， 熟悉公司代码框架， 了解各接口使用规范
+  #  tech:
+  duty: >-
+    1) 抓取股票网站股评， 构建了股评情感词库，进行了基于字典的情感分析.
+    2) 实现了贝叶斯分类器、支持向量机算法、 Adaboost 构建了股评情感分析模型.
+  #  result:
+- name: 五子棋小程序
+  keywords: 使用蒙特卡洛算法实现五子棋小程序
+  #  tech:
+  duty: >-
+    1) 主要是根据科大讯飞大数据研究院提供的合肥市交通数据集，对其中的时空特征构建机器学习预测模型，并根据预测模型输出的信息建立符合实际情况的 SUMO 仿真场景.
+    2) 在该平台基础上建立了杭州部分区域出行仿真路网以及台州部分区域出行仿真路网,平台类似于 OpenAI 的 gym.
+  #  result:

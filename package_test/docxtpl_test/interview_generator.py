@@ -17,7 +17,7 @@ if __name__ == '__main__':
     tpl = DocxTemplate('interview_report_tpl.docx')
     context = edict({
         "type": "校招",
-        "name": "秦昊杰",
+        "name": "杨佐治",
         "university": "四川大学(测控技术与仪器)-四川大学(计算机科学与技术)",
         # "major": "物理学类",
         "projects_file": "qinhaojie.yml"
