@@ -7,9 +7,8 @@
     2) Surveyed the research area of integrating scripts and search in RTS games
   result: 2 paper
   question:
-    - 问题怎么建模的
-    - 详细介绍下MCTS
-    - RTS 游戏怎么应用强化学习
+    - xxxxx
+    - yyyyy
 - name: Learning policy/evaluation function from replay data
   keywords:
   #  tech:
@@ -17,8 +16,6 @@
     1) Learning policy from replay data to inform the tree search.
     2) Learning evaluation function using convolution neural nets that can take input from maps of varied sizes.
   result: 2 paper
-  question:
-    - 怎么建模的，问题的输入输出是什么？
 - name: Bandit-based gameplay/playout policy optimization
   keywords:
   #  tech:
