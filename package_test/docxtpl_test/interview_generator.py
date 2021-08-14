@@ -7,6 +7,12 @@ from docxtpl import DocxTemplate
 from jinja2 import Environment
 
 
+points = {
+    "实习生": 3,
+    "校招": 4,
+    "社招": 5
+}
+
 def is_list(value):
     return isinstance(value, list)
 
@@ -22,13 +28,29 @@ def get_tpl(interview_type: str):
         raise ValueError("undefined interview_type: {}".format(interview_type))
 
 
+def get_ai_questions(interview_type: str):
+    level = points[interview_type]
+    with open("questions/ai.yml", mode='r', encoding="utf-8") as f:
+        ai_questions = yaml.safe_load(f)
+    questions = [ai for ai in ai_questions if ai["point"] < level]
+    return sample(questions, min(10, len(questions)))
+
+
+def get_program_questions(interview_type: str):
+    level = points[interview_type]
+    with open("questions/program_questions.yml", mode='r', encoding='utf-8') as f:
+        program_questions = yaml.safe_load(f)
+    questions = [q for q in program_questions if q["point"] < level]
+    return sample(questions, min(10, len(questions)))
+
+
 if __name__ == '__main__':
     context = edict({
         "type": "校招",
         "name": "严茹丹",
         "university": "华中科技大学",
         # "major": "物理学类",
-        "projects_file": "yangrudan.yml"
+        "projects_file": "tpl/projects.yml"
     })
     tpl = get_tpl(context.type)
 
@@ -36,12 +58,8 @@ if __name__ == '__main__':
         projects = yaml.safe_load(f)
     # pp.pprint(projects)
     context["projects"] = projects
-    with open("questions/ai.yml", mode='r', encoding="utf-8") as f:
-        ai_questions = yaml.safe_load(f)
-    context["ai_questions"] = sample(ai_questions, min(10, len(ai_questions)))
-    with open("questions/program_questions.yml", mode='r', encoding='utf-8') as f:
-        program_questions = yaml.safe_load(f)
-    context["program_questions"] = sample(program_questions, min(10, len(program_questions)))
+    context["ai_questions"] = get_ai_questions(context.type)
+    context["program_questions"] = get_program_questions(context.type)
     pp.pprint(context)
 
     jinja_env = Environment()
