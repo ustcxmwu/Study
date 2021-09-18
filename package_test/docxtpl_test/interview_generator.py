@@ -46,11 +46,11 @@ def get_program_questions(interview_type: str):
 
 if __name__ == '__main__':
     context = edict({
-        "type": "校招",
-        "name": "严茹丹",
-        "university": "华中科技大学",
+        "type": "社招",
+        "name": "王梦硕",
+        "university": "复旦（微电子）- 复旦（微电子硕博连读）",
         # "major": "物理学类",
-        "projects_file": "tpl/projects.yml"
+        "projects_file": "wangmengshuo.yml"
     })
     tpl = get_tpl(context.type)
 
