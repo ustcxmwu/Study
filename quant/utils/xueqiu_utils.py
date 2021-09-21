@@ -2,41 +2,16 @@ import json
 
 import browser_cookie3
 import requests
-import yaml
-from easydict import EasyDict as edict
 from requests import Response
 
-from quant.utils.east_money_utils import get_stocks
 
-url = "http://quote.eastmoney.com/zixuan/"
-
-
-def to_eastmoney_code(code: str):
-    if code >= '333333':
-        # 上海
-        return '1%24{}'.format(code)
-    else:
-        return '0%24{}'.format(code)
-
-
-def parse_resp(resp: Response, key=None):
-    if resp.status_code != 200:
-        raise Exception('code:{},msg:{}'.format(resp.status_code, resp.content))
-    result = resp.text
-    try:
-        js_obj = json.loads(resp.text)
-    except ValueError as e:
-        try:
-            js_obj = json.loads(resp.text[result.index('(') + 1:result.index(')')])
-        except ValueError as e:
-            raise ValueError("Response Json Error:{}".format(resp.text))
-
-    data = js_obj.get('data', None)
-    if data and key:
-        result_value = data.get(key)
-    else:
-        result_value = data
-    return js_obj['state'], result_value
+def get_symbol(code: str):
+    code = code.strip()
+    pre = code[:3]
+    if pre in ["300", "000", "200"]:
+        return "SZ" + code
+    elif pre in ["601", "602", "603", "605", "900", "688", "002"]:
+        return "SH" + code
 
 
 def load_config():
@@ -106,9 +81,18 @@ def add_stock_to_group(group_name: str, stock: str):
         pass
 
 
-A
+def add_stocks(group_name: str, filename: str):
+    qingze_codes = []
+    with open(filename, mode='r') as f:
+        for line in f.readlines():
+            qingze_codes.append(get_symbol(line))
+    for symbol in qingze_codes:
+        add_stock_to_group(group_name, symbol)
+
+
 if __name__ == '__main__':
     print(get_groups())
     # print(add_groups("zzz"))
     # print(add_stock_to_group("zzz", "SZ300722"))
-    print(delete_groups("www"))
+    # print(delete_groups("www"))
+    add_stocks("清则9月", "清则洞察9月.txt")
