@@ -2,7 +2,6 @@ import json
 
 import browser_cookie3
 import requests
-from requests import Response
 
 
 # def get_symbol(code: str):
@@ -105,4 +104,5 @@ if __name__ == '__main__':
     # print(add_stock_to_group("zzz", "SZ300722"))
     # print(delete_groups("www"))
     # add_stocks("清则9月", "清则洞察9月.txt")
-    add_stocks("清则ETF", "ETF导入.txt")
+    # add_stocks("清则ETF", "ETF导入.txt")
+    add_stocks("清则好公司", "好公司.txt")
