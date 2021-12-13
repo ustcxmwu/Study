@@ -1,8 +1,5 @@
-appkey: d41d8cd98f00b204e9800998ecf8427e
-cookie: qgqp_b_id=62f4172e21712e0876b1103cbd446f3a; st_si=01813375898024; yzmkey=8b6874dac88940a7bcb26bc1b370100b;
-  st_asi=delete; p_origin=https%3A%2F%2Fpassport2.eastmoney.com; ct=xyHx4DhxSBePfEILrTDKm38yW206hi1JFl8_qaIxbZBlpwdK9oa-FkiZNVXc0B0GVcMBjiv-3gQBw2cClhc7rYKteXGOrOg_-2mYATsblpXTLkihITZW3dGJRErOBTA3ojXz8SNPLqyd91gB83VzjSid56KQEgp-Cmzq4e0aaDU; ut=FobyicMgeV5lCsvMiCrEngjwNcqFFLYU-axYvuFGJs3Z4HiigLyB3uCaOjK-tBx6IINuyHmLRVzvgPWYhwQKk_WDXn6vGU91xIL9X-ab4F67FhzeSH26SFwD50i1w5sDf-5Qe7jAnRvod0ocXUmDoJFw_6YFC8vjtaI7KieUdnZMCcsUWR87TqP9FLurZA9Zn2kT6dz3ngiFDb_vpe1_Ud7vRkj2zTch7pM9BwrYVMIZPlvHiwmjoldivyY7q_OpM7lwkiwgdCaX9EzAtbyvi1JJb5eZCWRA; pi=3584054992341504%3bm3584054992341504%3bxmwu%3bPzDEuiyXc076TtH%2bnurdOc%2fidarjB3Jos8cYJeyJgSpvXIpRs%2bE%2bwBNNwKFu9aKCyc3s4d76dSGxMAz6lHz0m0WXJYjBUTeCHQQ4PwFQw%2f9kEGA4Jzm7h6FCqbC5Mfn2gItmig9742wRouW212dD0ugraJbEEpetl7wmK7nwD2KhgGFOlJsE65WGSDn3rFbJArQ57Qt1%3bRKQcn%2fAaOY13gSyR1rO0C%2fw%2fwOvT%2fCCjtuSswW4ClnDwvb3zrDjwv7jQ3Lh3ofxu3Px2mp14KYsXXZFwRgm4B4mMc1UpaVFpexf%2fQA01zkPstkR71ITMyuEUo20cxr0fSguQnHBxm%2fha5M5cWBu%2b%2fBJdmStBvA%3d%3d; uidal=3584054992341504xmwu; sid=8946226; vtpst=|; HAList=a-sz-300308-%u4E2D%u9645%u65ED%u521B; em-quote-version=topspeed; st_pvi=68992068652089; st_sp=2021-07-14%2007%3A14%3A54; st_inirUrl=https%3A%2F%2Fwww.baidu.com%2Flink; st_sn=51; st_psi=20210725103919518-113200301712-0093096176
-Referer: http://quote.eastmoney.com/
 urls:
+  index: http://quote.eastmoney.com/zixuan/newstatic/js/page/index.js?v=20210818
   webouter: http://myfavor.eastmoney.com/v4/webouter/
   groups: ggdefstkindexinfos?appkey={}&cb=jQuery3310952112454844529_1627180598002&_=1627180598003
   stocks: gstkinfos?appkey={}&cb=jQuery3310952112454844529_1627180598002&g={}&_=1627180598004

@@ -1,4 +1,6 @@
 import json
+import re
+from pprint import pprint
 
 import browser_cookie3
 import requests
@@ -43,8 +45,16 @@ def load_config():
     config = edict(config)
     headers = {'content-type': 'application/json',
                'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.107 Safari/537.36',
-               'Referer': config.Referer}
+               'Referer': 'http://quote.eastmoney.com/'}
     cookies_jar = browser_cookie3.chrome()
+    res = requests.get(config.urls.index, headers=headers)
+    if res.status_code == 200:
+        result = res.text
+        for line in result.split("\n"):
+            o = re.search(r"var appkey = '([a-z0-9]+)';", line)
+            if o:
+                config.appkey = o.group(1)
+                # print(config.appkey)
     return config, headers, cookies_jar
 
 
@@ -202,16 +212,20 @@ def add_qingze_group(gname: str, filename: str):
             print(result)
 
 
-if __name__ == '__main__':
-    print(get_groups())
+def main():
+    pprint(get_groups())
     # print(del_group("清则洞察"))
-    print(add_qingze_group("清则洞察9月", "清则洞察9月.txt"))
+    # print(add_qingze_group("清则洞察9月", "清则洞察9月.txt"))
     # print(add_qingze_group("清则ETF", "ETF导入.txt"))
     # print(add_qingze_group("清则好公司1", "好公司导入.txt"))
     # print(get_stocks("清则好公司"))
-    print(get_groups())
+    # print(get_groups())
     # print(get_stocks("xx"))
     # print(get_group_id("清则群"))
     # print(get_group_id("xxxxx"))
     # print(rename_group("xxxxx", "yyyyyy"))
     # print(get_group_id("yyyyyy"))
+
+
+if __name__ == '__main__':
+    main()
