@@ -8,7 +8,6 @@ cowpy
 docxtpl
 dynaconf
 easydict
-elo
 Flask
 flask_socketio
 imageio
