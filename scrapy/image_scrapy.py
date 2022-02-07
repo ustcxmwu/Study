@@ -17,7 +17,9 @@ class ImageScrapy(object):
 
     def get_html(self):
         try:
-            read = requests.get(self.full_url, timeout=2)
+            headers = {
+                'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36'}
+            read = requests.get(self.full_url, timeout=2, headers=headers)
             read.raise_for_status()
             read.encoding = read.apparent_encoding
             self.html = read.text
@@ -66,6 +68,8 @@ class ImageScrapy(object):
 
 if __name__ == '__main__':
     # url = "https://forum.xitek.com/thread-1890437-1-1-1.html"
-    url = "https://cl.ht52.xyz/htm_data/2007/7/4022171.html"
-    scrapy = ImageScrapy(url, filters=[lambda x: x.get("ess-data")])
+    url = "https://forum.xitek.com/thread-1926536-1-1.html"
+    # url = "https://cl.ht52.xyz/htm_data/2007/7/4022171.html"
+    # scrapy = ImageScrapy(url, filters=[lambda x: x.get("ess-data")])
+    scrapy = ImageScrapy(url, filters=[lambda x: x])
     scrapy.download_img()

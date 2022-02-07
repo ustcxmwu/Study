@@ -54,6 +54,10 @@ if __name__ == '__main__':
     browser.implicitly_wait(5)
     check = browser.find_element(By.ID, "divCaptcha")
     ActionChains(browser).move_to_element(check).click().perform()
+    browser.implicitly_wait(20)
+
+    cookie = browser.get_cookies()
+    print(cookie)
     # notice.select_by_value()
 
 
