@@ -43,7 +43,7 @@ stable_baselines
 statemachine
 statsmodels
 sympy
-tensorflow==2.3.0
+tensorflow==2.7.2
 tensorflow_probability==0.13.0
 torch==1.9.0
 torchvision==0.10.0
