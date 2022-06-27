@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 
 
 def main():
-    env = gym.make("FrozenLake-v0")
+    env = gym.make("FrozenLake-v1")
     n_games = 1000
     win_pct = []
     scores = []

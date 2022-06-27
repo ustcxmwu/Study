@@ -1,5 +1,5 @@
 # encoding:utf-8
-# !/usr/bin/env python
+# !/usr/bin/env python_language
 import psutil
 import time
 from threading import Lock
