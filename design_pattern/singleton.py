@@ -1,6 +1,3 @@
-import pytest
-
-
 class Singleton1(object):
     def __new__(cls, *args, **kwargs):
         if not hasattr(cls, 'instance'):
@@ -40,6 +37,7 @@ def test_lazy_singleton():
 
 class MetaSingleton(type):
     __instances = {}
+
     def __call__(cls, *args, **kwargs):
         if cls not in cls.__instances:
             cls.__instances[cls] = super(MetaSingleton, cls).__call__(*args, **kwargs)
@@ -54,4 +52,3 @@ def test_logger():
     log1 = Logger()
     log2 = Logger()
     assert log1 == log2
-

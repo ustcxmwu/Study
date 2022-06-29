@@ -1,7 +1,4 @@
-
-
 class ComputerState(object):
-
     name = "state"
     allowed = []
 
@@ -50,4 +47,3 @@ if __name__ == '__main__':
     com = Computer()
     com.changed(On)
     com.changed(Off)
-

@@ -1,6 +1,3 @@
-
-
-
 class EventManager(object):
 
     def __init__(self):
@@ -59,7 +56,6 @@ class Musician(object):
 
     def set_music_type(self):
         print("Jazz and Classical will be played\n\n")
-
 
 
 class You(object):

@@ -72,7 +72,6 @@ class PizzaStore():
             self.NonVegPizza.serve(self.VegPizza)
 
 
-
 if __name__ == '__main__':
     pizza = PizzaStore()
     pizza.makePizzas()

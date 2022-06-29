@@ -114,7 +114,3 @@ if __name__ == '__main__':
 
     news_publisher.add_news("Second News")
     news_publisher.notify()
-
-
-
-

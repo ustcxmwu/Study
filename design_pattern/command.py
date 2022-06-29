@@ -1,6 +1,3 @@
-
-
-
 from abc import ABCMeta, abstractmethod
 
 
@@ -98,4 +95,3 @@ if __name__ == '__main__':
     agent = Agent()
     agent.place_order(buy_order)
     agent.place_order(sell_order)
-

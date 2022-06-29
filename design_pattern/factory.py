@@ -56,7 +56,7 @@ class FaceBook(Profile):
         self.add_sections(AlbumSection())
 
 
-if __name__=='__main__':
+if __name__ == '__main__':
     profile_type = input('Facebook or Linkedin?')
     profile = eval(profile_type)()
     print('Creating Profile..', type(profile).__name__)
