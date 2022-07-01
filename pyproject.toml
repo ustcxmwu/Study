@@ -39,6 +39,8 @@ ray = "^1.13.0"
 stable-baselines = "^2.10.2"
 python-statemachine = "^0.8.0"
 ValidX = "^0.7"
+SQLAlchemy = "^1.4.39"
+mysql-connector-python = "^8.0.29"
 
 [tool.poetry.dev-dependencies]
 
