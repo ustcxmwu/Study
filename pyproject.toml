@@ -4,6 +4,11 @@ version = "0.1.0"
 description = ""
 authors = ["ustcxmwu <ustcxmwu@gmail.com>"]
 
+#[[tool.poetry.source]]
+#name = "aliyun"
+#url = "https://mirrors.aliyun.com/pypi/simple/"
+#default = true
+
 [tool.poetry.dependencies]
 python = "3.8"
 numpy = "^1.23.0"
@@ -28,19 +33,18 @@ dynaconf = "^3.1.9"
 Flask = "^2.1.2"
 psutil = "^5.9.1"
 Flask-SocketIO = "^5.2.0"
-helium = "^3.0.8"
 keyboard = "^0.13.5"
 Logbook = "^1.5.3"
 munch = "^2.5.0"
 pdfkit = "^1.0.0"
 pyecharts = "^1.9.1"
 pytest = "^7.1.2"
-ray = "^1.13.0"
 stable-baselines = "^2.10.2"
 python-statemachine = "^0.8.0"
 ValidX = "^0.7"
 SQLAlchemy = "^1.4.39"
 mysql-connector-python = "^8.0.29"
+ray = "^2.0.0"
 
 [tool.poetry.dev-dependencies]
 
