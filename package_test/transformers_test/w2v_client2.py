@@ -24,7 +24,7 @@ def get_stopwords(filename):
 
 def clean_stopwords(sentence: str, stopwords: List[str]):
     result = []
-    word_list = jieba.lcut(sentence)
+    word_list = jieba.cut(sentence)
     for w in word_list:
         if w not in stopwords:
             result.append(w)
@@ -32,7 +32,7 @@ def clean_stopwords(sentence: str, stopwords: List[str]):
 
 
 def avg_feature_vector(sentence, model, num_features, index2word_set):
-    words = jieba.lcut(sentence)
+    words = jieba.cut(sentence)
     feature_vec = np.zeros((num_features,), dtype='float32')
     n_words = 0
     for word in words:

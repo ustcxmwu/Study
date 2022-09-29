@@ -40,7 +40,8 @@ class ImageScrapy(object):
 
     def download_img(self):
         html_page = self.get_html()
-        soup = BeautifulSoup(html_page, "html5lib")
+        soup = BeautifulSoup(html_page, "lxml")
+        # soup = BeautifulSoup(html_page, "html5lib")
         # soup = BeautifulSoup(self.html, "html.parser")
         # all_images = soup.find_all('img', attrs={'style': 'cursor: pointer '})
         all_images = soup.find_all(name='img')
