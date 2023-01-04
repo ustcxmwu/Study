@@ -28,7 +28,7 @@ def update():
             # swap observation and action
             observation = observation_
             action = action_
-            time.sleep(0.5)
+            time.sleep(0.1)
 
             # break while loop when end of this episode
             if done:

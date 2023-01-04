@@ -4,13 +4,13 @@ version = "0.1.0"
 description = ""
 authors = ["ustcxmwu <ustcxmwu@gmail.com>"]
 
-#[[tool.poetry.source]]
-#name = "aliyun"
-#url = "https://mirrors.aliyun.com/pypi/simple/"
-#default = true
+[[tool.poetry.source]]
+name = "aliyun"
+url = "https://mirrors.aliyun.com/pypi/simple/"
+default = true
 
 [tool.poetry.dependencies]
-python = "3.8"
+python = ">=3.8,<3.11"
 numpy = "^1.23.0"
 matplotlib = "^3.5.2"
 gym = "0.21.0"
@@ -57,6 +57,10 @@ clickhouse-driver = "^0.2.4"
 fonttools = "^4.37.1"
 elasticsearch = "^8.4.1"
 line-profiler = "^3.5.1"
+pyod = "^1.0.5"
+pystan = "^3.5.0"
+html5lib = "^1.1"
+decorator = "^5.1.1"
 
 [tool.poetry.dev-dependencies]
 
