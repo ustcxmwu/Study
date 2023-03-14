@@ -5,15 +5,16 @@ description = ""
 authors = ["ustcxmwu <ustcxmwu@gmail.com>"]
 
 [[tool.poetry.source]]
-name = "aliyun"
-url = "https://mirrors.aliyun.com/pypi/simple/"
+name = "ustc"
+url = "https://pypi.mirrors.ustc.edu.cn/simple"
+#name = "aliyun"
+#url = "https://mirrors.aliyun.com/pypi/simple/"
 default = true
 
 [tool.poetry.dependencies]
 python = ">=3.8,<3.11"
 numpy = "^1.23.0"
 matplotlib = "^3.5.2"
-gym = "0.21.0"
 torch = "^1.11.0"
 pandas = "^1.4.3"
 pandas-profiling = "^3.2.0"
@@ -43,7 +44,6 @@ stable-baselines = "^2.10.2"
 python-statemachine = "^0.8.0"
 ValidX = "^0.7"
 SQLAlchemy = "^1.4.39"
-mysql-connector-python = "^8.0.29"
 ray = "^2.0.0"
 jieba = "^0.42.1"
 gensim = "^4.2.0"
@@ -61,6 +61,11 @@ pyod = "^1.0.5"
 pystan = "^3.5.0"
 html5lib = "^1.1"
 decorator = "^5.1.1"
+helium = "^3.0.9"
+keras = "^2.11.0"
+adaseq = "^0.6.0"
+gym = "^0.26.2"
+gradio = "^3.20.1"
 
 [tool.poetry.dev-dependencies]
 
