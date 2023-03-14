@@ -137,4 +137,6 @@ pytorch/mnist/
 
 .DS_Store
 
+__pytorch__
+
 /poetry.lock
