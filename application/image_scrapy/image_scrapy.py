@@ -1,6 +1,8 @@
 from pathlib import Path
+from typing import Callable
 from urllib.parse import urljoin, urlsplit, urlunsplit
 
+import bs4
 import gradio as gr
 import requests
 from bs4 import BeautifulSoup
@@ -13,13 +15,12 @@ headers = {
 
 class ImageScrapy(object):
 
-    def __init__(self, full_url, save_root="./", filters=None):
+    def __init__(self, full_url, save_root="./"):
         self.full_url = full_url
         self.save_root = Path(save_root)
         parts = urlsplit(full_url)
         self.web_root = urlunsplit((parts.scheme, parts.netloc, '', '', ''))
         self.html = None
-        self.filters = filters
         self.sess = requests.session()
         self.sess.keep_alive = False
 
@@ -39,25 +40,18 @@ class ImageScrapy(object):
     def get_abs_url(self, path):
         return urljoin(self.web_root, path)
 
-    def download_img(self):
+    def download_img(self, selector: Callable[[bs4.Tag], bool], img_link_attr: str = "src"):
         html_page = self.get_html()
         soup = BeautifulSoup(html_page, "lxml")
-        # soup = BeautifulSoup(html_page, "html5lib")
-        # soup = BeautifulSoup(self.html, "html.parser")
-        # all_images = soup.find_all('img', attrs={'style': 'cursor: pointer '})
-        # all_images = soup.find(id='conttpc').find_all(name="img")
-        all_images = soup.find_all(lambda tag: tag.parent.get("id", "") == "conttpc" and tag.name == "img")
-        if self.filters is not None:
-            for filter_func in self.filters:
-                all_images = filter(filter_func, all_images)
+        all_images = soup.find_all(selector)
         if all_images:
             root_path = Path(self.get_html_title(soup))
             root_path.mkdir(exist_ok=True)
             for idx, img in enumerate(all_images):
-                # img_url = img['src']
-                img_url = img['ess-data']
-                # print(img_url)
-                img_url = img_url.replace('thumb_', '')
+                img_url = img.get(img_link_attr)
+                if img_url is None:
+                    print(f"image tag: {img} can not parse image link.")
+                    continue
                 img_url = self.get_abs_url(img_url)
                 print(img_url)
                 img_ext = img_url.split('.')[-1]
@@ -72,11 +66,34 @@ class ImageScrapy(object):
         return len(all_images)
 
 
-def parse_image(url: str):
+def xyz_selector(tag: bs4.Tag) -> bool:
+    return tag.parent.get("id", "") == "conttpc" and tag.name == "img"
+
+
+selectors = {
+    "xyz": (xyz_selector, "ess-data")
+}
+
+
+def parse_images(url: str, selector: str) -> int:
     scrapy = ImageScrapy(url)
-    return scrapy.download_img()
+    return scrapy.download_img(*selectors[selector])
 
 
 if __name__ == '__main__':
-    demo = gr.Interface(fn=parse_image, inputs="text", outputs="text")
+    # https://cl.3572x.xyz/htm_mob/2303/7/5601509.html
+    demo = gr.Interface(
+        fn=parse_images,
+        # inputs="text",
+        inputs=[
+            gr.Textbox(
+                label="Image URL",
+                lines=1,
+                value="The quick brown fox jumped over the lazy dogs.",
+            ),
+            gr.Dropdown(
+                ["xyz"], label="Selector", info="Will add more selectors later!"
+            ),
+        ],
+        outputs="text")
     demo.launch()
