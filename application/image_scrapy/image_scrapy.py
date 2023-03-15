@@ -10,6 +10,7 @@ headers = {
     "Content-Type": "application/json; charset=utf-8"
 }
 
+
 class ImageScrapy(object):
 
     def __init__(self, full_url, save_root="./", filters=None):
@@ -44,7 +45,8 @@ class ImageScrapy(object):
         # soup = BeautifulSoup(html_page, "html5lib")
         # soup = BeautifulSoup(self.html, "html.parser")
         # all_images = soup.find_all('img', attrs={'style': 'cursor: pointer '})
-        all_images = soup.find(id='conttpc').find_all(name="img")
+        # all_images = soup.find(id='conttpc').find_all(name="img")
+        all_images = soup.find_all(lambda tag: tag.parent.get("id", "") == "conttpc" and tag.name == "img")
         if self.filters is not None:
             for filter_func in self.filters:
                 all_images = filter(filter_func, all_images)
@@ -76,6 +78,5 @@ def parse_image(url: str):
 
 
 if __name__ == '__main__':
-    # url = "https://forum.xitek.com/thread-1959111-1-1.html"
     demo = gr.Interface(fn=parse_image, inputs="text", outputs="text")
     demo.launch()
