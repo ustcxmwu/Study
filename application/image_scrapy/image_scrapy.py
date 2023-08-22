@@ -45,8 +45,8 @@ class ImageScrapy(object):
         soup = BeautifulSoup(html_page, "lxml")
         all_images = soup.find_all(selector)
         if all_images:
-            root_path = Path(self.get_html_title(soup, len(all_images)))
-            root_path.mkdir(exist_ok=True)
+            root_path = Path("./download/" + self.get_html_title(soup, len(all_images)))
+            root_path.mkdir(exist_ok=True, parents=True)
             for idx, img in enumerate(all_images):
                 img_url = img.get(img_link_attr)
                 if img_url is None:

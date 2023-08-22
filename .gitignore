@@ -140,3 +140,4 @@ pytorch/mnist/
 __pytorch__
 
 /poetry.lock
+/application/image_scrapy/download/
