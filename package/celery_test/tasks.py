@@ -14,7 +14,7 @@ import time
 from app import divide
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     task = divide.delay(1, 3)
     while True:
         print(task.state)

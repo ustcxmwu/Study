@@ -5,11 +5,11 @@ description = ""
 authors = ["ustcxmwu <ustcxmwu@gmail.com>"]
 
 [[tool.poetry.source]]
-name = "ustc"
-url = "https://pypi.mirrors.ustc.edu.cn/simple"
-#name = "aliyun"
-#url = "https://mirrors.aliyun.com/pypi/simple/"
-default = true
+#name = "ustc"
+#url = "https://pypi.mirrors.ustc.edu.cn/simple"
+name = "aliyun"
+url = "https://mirrors.aliyun.com/pypi/simple/"
+priority = "default"
 
 [tool.poetry.dependencies]
 python = ">=3.8,<3.11"
@@ -65,11 +65,14 @@ helium = "^3.0.9"
 keras = "^2.11.0"
 adaseq = "^0.6.0"
 gym = "^0.26.2"
-gradio = "^3.20.1"
+gradio = "^4.3.0"
 webdriver-manager = "^3.8.6"
 celery = {extras = ["redis"], version = "^5.3.1"}
 redis = "^5.0.0"
 sweetviz = "^2.1.4"
+urllib3 = "1.26.15"
+discord-py = "^2.3.2"
+python-discord-client = "^0.7.3.8"
 
 [tool.poetry.dev-dependencies]
 
