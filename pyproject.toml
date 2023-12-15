@@ -12,12 +12,11 @@ authors = ["ustcxmwu <ustcxmwu@gmail.com>"]
 #priority = "default"
 
 [tool.poetry.dependencies]
-python = ">=3.8,<3.11"
+python = ">=3.8,<3.9.7 || >3.9.7,<3.11"
 numpy = "^1.23.0"
 matplotlib = "^3.5.2"
 torch = "^1.11.0"
 pandas = "^1.4.3"
-pandas-profiling = "^3.2.0"
 zerorpc = "^0.6.3"
 pyglet = "^1.5.26"
 torchvision = "^0.12.0"
@@ -73,6 +72,14 @@ sweetviz = "^2.1.4"
 urllib3 = "1.26.15"
 discord-py = "^2.3.2"
 python-discord-client = "^0.7.3.8"
+kaleido = "0.2.1"
+dtale = "^3.8.1"
+ydata-profiling = "^4.6.3"
+autoviz = "0.1.720"
+klib = "^1.1.2"
+dabl = "^0.2.5"
+pygwalker = "^0.3.18"
+streamlit = "^1.29.0"
 
 [tool.poetry.dev-dependencies]
 
