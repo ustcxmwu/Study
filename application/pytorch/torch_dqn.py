@@ -1,9 +1,8 @@
+import gym
+import numpy as np
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-import numpy as np
-import gym
-
 
 BATCH_SIZE = 32
 LR = 0.01
@@ -49,7 +48,10 @@ class DQN(object):
         if np.random.uniform() < EPSILON:
             action = self.eval_net.forward(x)
             # action = torch.max(action, 1)[1].numpy()[0]
-            action = int(torch.max(action).detach().numpy())
+            # action = int(torch.max(action).detach().numpy())
+            action = int(torch.argmax(action).detach().numpy())
+            if action == 2:
+                print(action)
         else:
             action = np.random.randint(0, N_ACTIONS)
         return action
@@ -84,7 +86,7 @@ class DQN(object):
 if __name__ == "__main__":
     dqn = DQN()
 
-    for eps_id in range(10):
+    for eps_id in range(100):
         print("========= eps:{}".format(eps_id))
         s, reset_info = env.reset()
         while True:
@@ -93,12 +95,13 @@ if __name__ == "__main__":
 
             s_, r, done, time_up, info = env.step(a)
 
-            x, x_dot, theta, theta_dot = s_
-            r1 = (env.x_threshold - abs(x)) / env.x_threshold - 0.8
-            r2 = (
-                env.theta_threshold_radians - abs(theta)
-            ) / env.theta_threshold_radians - 0.5
-            r = r1 + r2
+            # reward shaping
+            # x, x_dot, theta, theta_dot = s_
+            # r1 = (env.x_threshold - abs(x)) / env.x_threshold - 0.8
+            # r2 = (
+            #     env.theta_threshold_radians - abs(theta)
+            # ) / env.theta_threshold_radians - 0.5
+            # r = r1 + r2
 
             dqn.store_eps(s, a, r, s_)
 
