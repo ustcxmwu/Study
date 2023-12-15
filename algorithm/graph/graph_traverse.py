@@ -1,6 +1,6 @@
 # -*-coding:utf-8-*-
 
-'''
+"""
 深度优先遍历： 是一种用于遍历树或者图的算法。沿着树的深度遍历树的节点，尽可能深地搜索树的分支。
             当节点v的所在边都被搜索过了。搜索将回溯到节点v的那条边的起始节点。
             这一过程已知进行，直到已发现从源节点可达的所有节点为止。
@@ -9,7 +9,7 @@
 bfs
             从根节点开始，沿着树的宽度遍历树的节点，如果所有节点都被访问，则算法终止
             广度优先遍历一般采用open-close表
-'''
+"""
 
 
 class Graph(object):
@@ -18,20 +18,19 @@ class Graph(object):
 
         # self.sequence是字典，key是点，value是与key相连的边
         self.sequence = {}
-        # self.side是临时变量，主要用于保存与 指定点v 相连接的点
-        self.side = []
+        # side是临时变量，主要用于保存与 指定点v 相连接的点
         for node in nodes:
-            for side in sides:
-                u, v = side
+            side_tmp = []
+            for u, v in sides:
+                # u, v = side
                 # 指定点与另一个点在同一个边(可能是源点u或者是终点v)中，则说明这个点与指定点是相连接的点,则需要将这个点放到self.side中
                 if node == u:
-                    self.side.append(v)
+                    side_tmp.append(v)
                 elif node == v:
-                    self.side.append(u)
+                    side_tmp.append(u)
             # 注意，这里属于第二层循环，第一层是nodes中的一个点，第二层主要是遍历属于这个点的所有边，然后将点和边组成字典
             # 这里的字典aequence的key是第一层循环里面的一个点，value是一个[],就是刚才的临时变量self.side
-            self.sequence[node] = self.side
-            self.side = []
+            self.sequence[node] = side_tmp
         # print self.sequence
         # {1: [2, 3], 2: [1, 4, 5], 3: [1, 6, 7], 4: [2, 8], 5: [2, 8], 6: [3, 7], 7: [3, 6], 8: [4, 5]}
 
@@ -56,7 +55,6 @@ class Graph(object):
                     queue.append(w)
         return order
 
-    # bfs同理
     def bfs(self, node0):
         queue, order = [], []
         queue.append(node0)
@@ -72,15 +70,17 @@ class Graph(object):
 
 def main():
     nodes = [(i + 1, i + 1) for i in range(8)]
-    sides = [((1, 1), (2, 2)),
-             ((1, 1), (3, 3)),
-             ((2, 2), (4, 4)),
-             ((2, 2), (5, 5)),
-             ((4, 4), (8, 8)),
-             ((5, 5), (8, 8)),
-             ((3, 3), (6, 6)),
-             ((3, 3), (7, 7)),
-             ((6, 6), (7, 7))]
+    sides = [
+        ((1, 1), (2, 2)),
+        ((1, 1), (3, 3)),
+        ((2, 2), (4, 4)),
+        ((2, 2), (5, 5)),
+        ((4, 4), (8, 8)),
+        ((5, 5), (8, 8)),
+        ((3, 3), (6, 6)),
+        ((3, 3), (7, 7)),
+        ((6, 6), (7, 7)),
+    ]
 
     G = Graph(nodes, sides)
     path1 = G.dfs((1, 1))
@@ -90,5 +90,5 @@ def main():
     print(path2)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

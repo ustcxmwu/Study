@@ -4,12 +4,12 @@ version = "0.1.0"
 description = ""
 authors = ["ustcxmwu <ustcxmwu@gmail.com>"]
 
-[[tool.poetry.source]]
-#name = "ustc"
-#url = "https://pypi.mirrors.ustc.edu.cn/simple"
-name = "aliyun"
-url = "https://mirrors.aliyun.com/pypi/simple/"
-priority = "default"
+#[[tool.poetry.source]]
+##name = "ustc"
+##url = "https://pypi.mirrors.ustc.edu.cn/simple"
+#name = "aliyun"
+#url = "https://mirrors.aliyun.com/pypi/simple/"
+#priority = "default"
 
 [tool.poetry.dependencies]
 python = ">=3.8,<3.11"
