@@ -3,7 +3,7 @@
 """
 @File    :   newspaper_client.py
 @Time    :   2022/9/7 15:09
-@Author  :   Wu Xiaomin <wuxiaomin@pandadastudio.com>
+@Author  :   Wu Xiaomin <xmwu@mail.ustc.edu.cn>
 @Version :   1.0
 @License :   (C)Copyright 2020-2022, Wu Xiaomin
 @Desc    :   

@@ -7,7 +7,7 @@
 @Author  :   Wu Xiaomin <>
 @Version :   1.0
 @License :   (C)Copyright 2023, Wu Xiaomin
-@Desc    :   
+@Desc    :
 """
 import pandas as pd
 from ydata_profiling import ProfileReport

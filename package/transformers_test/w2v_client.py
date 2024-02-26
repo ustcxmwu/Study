@@ -1,13 +1,13 @@
 #!/usr/bin/env python
 # -*-coding:utf-8 -*-
-'''
+"""
 @File    :   w2v_client.py
 @Time    :   2022/9/5 10:17
-@Author  :   Wu Xiaomin <wuxiaomin@pandadastudio.com>
+@Author  :   Wu Xiaomin <xmwu@mail.ustc.edu.cn>
 @Version :   1.0
 @License :   (C)Copyright 2020-2021, Wu Xiaomin
 @Desc    :   
-'''
+"""
 
 # -*-coding:utf8-*-
 import gensim
@@ -39,8 +39,8 @@ def cos(vector1, vector2):
     normB = 0.0
     for a, b in zip(vector1, vector2):
         dot_product += a * b
-        normA += a ** 2
-        normB += b ** 2
+        normA += a**2
+        normB += b**2
     if normA == 0.0 or normB == 0.0:
         return None
     else:
@@ -60,7 +60,7 @@ def distance(vector1, vector2):
     d = 0
     for a, b in zip(vector1, vector2):
         d += (a - b) ** 2
-    return d ** 0.5
+    return d**0.5
 
 
 def gensim_word2vec():
@@ -135,5 +135,5 @@ def glove_main():
         print(id_question[id[0][0]][2])
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     gensim_word2vec()
