@@ -15,6 +15,7 @@ from pathlib import Path
 
 import pandas as pd
 from joblib import load
+from openpyxl import load_workbook
 from sklearn.metrics import classification_report
 from sklearn.model_selection import cross_val_score
 
