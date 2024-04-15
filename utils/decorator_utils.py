@@ -37,17 +37,63 @@ def handle_exceptions(func, p1=1, *args, **kwargs):
         print(f"An unexpected error occurred: {e}")
 
 
+def cache(func):
+    cached = {}
+
+    def cache_wrapper(*args, **kwargs):
+        key = str(args) + str(kwargs)
+        if key in cached:
+            return cached[key]
+        result = func(*args, **kwargs)
+        cached[key] = result
+        return result
+
+    return cache_wrapper
+
+
+def retry(max_retries):
+    def _decorator(func):
+        def _wrapper(*args, **kwargs):
+            attempts = 0
+            while attempts < max_retries:
+                try:
+                    return func(*args, **kwargs)
+                except Exception:
+                    attempts += 1
+                    time.sleep(1)
+            raise Exception(f"函数 {func.__name__} 执行失败,已达到最大重试次数")
+
+        return _wrapper
+
+    return _decorator
+
+
+def log_to_file_decorator(log_file_path):
+    def _decorator(func):
+        def _wrapper(*args, **kwargs):
+            with open(log_file_path, "a") as f:
+                f.write(f"调用函数 {func.__name__},参数为：args={args},kwargs={kwargs}\n")
+            result = func(*args, **kwargs)
+            with open(log_file_path, "a") as f:
+                f.write(f"函数 {func.__name__} 的返回结果为：{result}\n")
+            return result
+
+        return _wrapper
+
+    return _decorator
+
+
 def logit(name):
-    def decorator(func):
+    def _decorator(func):
         @functools.wraps(func)
-        def wrapper(*args, **kwargs):
+        def _wrapper(*args, **kwargs):
             value = func(*args, **kwargs)
             print(f'{name} is calling: ' + func.__name__)
             return value
 
-        return wrapper
+        return _wrapper
 
-    return decorator
+    return _decorator
 
 
 @logit(name='oldbird')
