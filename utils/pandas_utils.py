@@ -10,12 +10,13 @@
 @Desc    :   pandas 相关工具类
 """
 import os
+from pathlib import Path
 
 import pandas as pd
 from openpyxl import load_workbook
 
 
-def summay_excel_report(df: pd.DataFrame, filename: os.PathLike, sheet: str, adjust: bool = True) -> None:
+def summary_excel_report(df: pd.DataFrame, filename: Path, sheet: str, adjust: bool = True) -> None:
     if filename.exists():
         with pd.ExcelWriter(filename, engine='openpyxl', mode='a', if_sheet_exists='replace') as writer:
             df.to_excel(writer, sheet_name=sheet, index=False)

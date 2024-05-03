@@ -85,6 +85,7 @@ html5lib = "^1.1"
 discord-py = "^2.3.2"
 autoscraper = "^1.1.14"
 scikit-image = "^0.22.0"
+drissionpage = "^4.0.4.21"
 
 [tool.poetry.dev-dependencies]
 

@@ -9,6 +9,7 @@
 @License :   (C)Copyright 2024, Wu Xiaomin
 @Desc    :   sklearn 相关工具类
 """
+import inspect
 import os
 from collections import defaultdict
 from pathlib import Path
@@ -21,8 +22,11 @@ from sklearn.model_selection import cross_val_score
 
 
 def get_var_name(var):
-    for name, value in locals().items():
-        if value is var:
+    current_frame = inspect.currentframe()
+    caller_frame = inspect.getouterframes(current_frame)[2]
+    local_vars = caller_frame.frame.f_locals
+    for name, value in local_vars.items():
+        if value is var and name != "var":
             return name
     else:
         raise ValueError(f"Variable {var} not found in local scope.")
