@@ -57,6 +57,11 @@ def get_radar_chart(legends: List[str], data_groups: List[List[float]], labels: 
     return fig
 
 
+def rgb_to_hex(r: int, g: int, b: int) -> str:
+    return f"#{r:02x}{g:02x}{b:02x}"
+
+
 if __name__ == '__main__':
     a = 15
     print(f"{a:02x}")
+    print(rgb_to_hex(100, 100, 100))

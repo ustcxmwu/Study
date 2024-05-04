@@ -17,8 +17,8 @@ from openpyxl import load_workbook
 
 
 def summary_excel_report(df: pd.DataFrame, filename: Path, sheet: str, adjust: bool = True) -> None:
-    """
-    将 Dataframe 数据保存入 excel filename 的 sheet 中
+    """将 Dataframe 数据保存入 excel filename 的 sheet 中
+
     Args:
         df (): 要保存的数据
         filename ():  Excel 文件
@@ -39,8 +39,8 @@ def summary_excel_report(df: pd.DataFrame, filename: Path, sheet: str, adjust: b
 
 
 def adjust_column_width(file_name: os.PathLike) -> None:
-    """
-    调整 Excel 文件的列宽
+    """调整 Excel 文件的列宽
+
     Args:
         file_name ():  Excel 文件名称
 
