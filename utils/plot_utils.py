@@ -22,6 +22,8 @@ elif "darwin" in platform.system().lower():
 elif "linux" in platform.system().lower():
     # ubuntu 安装字体参考： https://blog.csdn.net/takedachia/article/details/131017286
     plt.rcParams["font.sans-serif"] = ["simhei"]
+else:
+    raise ValueError(f"unsupported system {platform.system()}")
 
 plt.rcParams["axes.unicode_minus"] = False
 
@@ -53,3 +55,8 @@ def get_radar_chart(legends: List[str], data_groups: List[List[float]], labels: 
         # plt.pause(0.1)  # 暂停一段时间以便于观察每组数据的绘制过程
     plt.legend(loc='best')
     return fig
+
+
+if __name__ == '__main__':
+    a = 15
+    print(f"{a:02x}")

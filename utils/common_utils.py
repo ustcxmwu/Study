@@ -9,9 +9,10 @@
 @License :   (C)Copyright 2024, Wu Xiaomin
 @Desc    :   
 """
+from typing import List, Generator
 
 
-def flatten_list_tuple_range(l):
+def flatten_list_tuple_range(l: List) -> Generator:
     for el in l:
         if isinstance(el, (list, tuple, range)):
             yield from flatten_list_tuple_range(el)
