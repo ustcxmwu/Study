@@ -13,6 +13,7 @@ from openpyxl import Workbook
 from openpyxl.utils import get_column_letter, column_index_from_string
 from openpyxl.styles import Alignment
 from openpyxl.drawing.image import Image
+from openpyxl import load_workbook
 
 
 def merge_cell():
@@ -56,4 +57,12 @@ def add_image():
 
 if __name__ == '__main__':
     # merge_cell()
-    add_image()
+    # add_image()
+    wb = load_workbook(filename="我的数据.xlsx")
+    ws = wb["我的数据"]
+    print(ws)
+    ws.merge_cells(start_row=1, end_row=7, start_column=2, end_column=2)
+    print(ws.merged_cells.ranges)
+    for m in ws.merged_cells.ranges:
+        ws[str(m).split(":")[0]].alignment = Alignment(horizontal="center", vertical="center")
+    wb.save("我的数据.xlsx")
