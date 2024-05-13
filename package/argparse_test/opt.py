@@ -9,12 +9,15 @@ def main(args):
     print("-l {0}".format(args.log))  # 如果命令行中输入该参数，则该值为True。因为为短格式"-l"指定了别名"--log"，所以程序中用args.log来访问
 
 
-if __name__ == '__main__':
+def parse_args():
     parser = argparse.ArgumentParser(usage="it's usage tip.", description="help info.")
     parser.add_argument("--address", default=80, help="the port number.", dest="code_address")
     parser.add_argument("--flag", choices=['.txt', '.jpg', '.xml', '.png'], default=".txt", help="the file type")
     parser.add_argument("--port", type=int, required=True, help="the port number.")
     parser.add_argument("-l", "--log", default=False, action="store_true", help="active log info.")
+    return parser.parse_args()
 
-    args = parser.parse_args()
+
+if __name__ == '__main__':
+    args = parse_args()
     main(args)

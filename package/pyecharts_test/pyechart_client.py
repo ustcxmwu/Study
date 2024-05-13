@@ -25,4 +25,5 @@ def shanxi():
 
 
 if __name__ == '__main__':
-    shanxi()
+    # shanxi()
+    fn1()

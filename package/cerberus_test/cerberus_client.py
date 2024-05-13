@@ -4,18 +4,10 @@
 from cerberus import Validator
 import yaml
 from easydict import EasyDict
-from bidict import bidict, namedbidict
+from bidict import bidict
 from cerberus import Validator
-
-
 
 if __name__ == '__main__':
     with open("tmm.yml", mode='r') as f:
         tmm = yaml.safe_load(f)
     print(tmm)
-
-    Tmm = namedbidict("Tmm", "team_member", "model")
-
-
-
-
