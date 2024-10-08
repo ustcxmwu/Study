@@ -50,5 +50,20 @@ def xueqiu_login():
     page.ele('.newLogin_modal__login__btn_viK  newLogin_btn-active_144').click()
 
 
+def phone():
+    page = ChromiumPage()
+    page.set.load_mode.eager()
+    page.get("https://www.gsmarena.com/res.php3?sSearch=iPhone9%2C4")
+    return page.ele(".makers").ele("tag:a").href
+
+def price(url):
+    page = ChromiumPage()
+    page.set.load_mode.eager()
+    page.get(url)
+    return page.ele(".makers").ele("tag:a").href
+
+
 if __name__ == '__main__':
-    xueqiu_login()
+    # xueqiu_login()
+    url = phone()
+    print(price(url))

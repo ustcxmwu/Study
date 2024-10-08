@@ -86,6 +86,8 @@ discord-py = "^2.3.2"
 autoscraper = "^1.1.14"
 scikit-image = "^0.22.0"
 drissionpage = "^4.0.4.21"
+openai = "^1.35.7"
+jupyter = "^1.0.0"
 
 [tool.poetry.dev-dependencies]
 
