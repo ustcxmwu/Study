@@ -22,7 +22,7 @@ def plumber_read_text(f):
         # 遍历每一页
         for page_num, page in enumerate(pdf.pages):
             # 提取文本
-            text = page.extract_text()
+            # text = page.extract_text()
             # print(f"Page {page_num + 1}:")
             # print(text)
 
@@ -34,33 +34,26 @@ def plumber_read_text(f):
                     for row in table:
                         res.append(" ".join([re.sub(r'[\n/]', "", r) for r in row if r is not None]))
                         # print(row)
-            return res
+            return " ".join(res)
 
 
 def get_seller(res):
-    pattern1 = re.compile(r"销售方信息\s*名称：(.+?)统一社会信用代码纳税人识别号：(\w+)")
-    pattern2 = re.compile(r"销售方\s*名\s*称\s*:\s*([^\n纳税人]+)\s*纳税人识别号\s*:\s*(\d+)")
-    for text in res:
-        match_1 = pattern1.search(text)
-        if match_1:
-            seller_name = match_1.group(1)
-            tax_id = match_1.group(2)
-            return seller_name, tax_id
-        match_2 = pattern2.search(text)
-        if match_2:
-            seller_name = match_2.group(1)
-            tax_id = match_2.group(2)
-            return seller_name, tax_id
-    else:
-        return None, None
+    # pattern1 = re.compile(r"销售方(?:信息)? *名 ?称[：:]? ?(.+?)(?:统一社会信用代码)? ?纳税人识别号[:：]? ?(\w+)")
+    pattern1 = re.compile(r"销+售+方+(?:信+息+)? *名+ ?称+[：:]* ?(.+?)(?:统+一+社+会+信+用+代+码+)? ?纳+税+人+识+别+号+[:：]* ?(\w+)")
+    match_1 = pattern1.search(res)
+    if match_1:
+        seller_name = match_1.group(1)
+        tax_id = match_1.group(2)
+        return seller_name, tax_id
+    print(res)
+    return None, None
 
 
 def get_total_amount(res):
     pattern = r'价税合计.*?([\d,.]+)'
-    for text in res:
-        match = re.search(pattern, text)
-        if match:
-            return match.group(1)
+    match = re.search(pattern, res)
+    if match:
+        return match.group(1)
     else:
         return None
 
@@ -78,11 +71,12 @@ def main(month="10月"):
         if amount is None:
             print(f)
             print(res)
+            stat_info["金额"].append(0)
         else:
-            print(amount)
+            print(seller, seller_id, amount)
             stat_info["金额"].append(float(amount))
             total += float(amount)
-        f.rename(f"{f.parent}/{amount}.pdf")
+            f.rename(f"{f.parent}/{amount}.pdf")
     print(f"合计金额: {total:.2f}")
     stat_info["销售方"].append("合计")
     stat_info["销售方纳税人识别号"].append("")
