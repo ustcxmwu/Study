@@ -39,7 +39,7 @@ def plumber_read_text(f):
 
 def get_seller(res):
     # pattern1 = re.compile(r"销售方(?:信息)? *名 ?称[：:]? ?(.+?)(?:统一社会信用代码)? ?纳税人识别号[:：]? ?(\w+)")
-    pattern1 = re.compile(r"销+售+方+(?:信+息+)? *名+ ?称+[：:]* ?(.+?)(?:统+一+社+会+信+用+代+码+)? ?纳+税+人+识+别+号+[:：]* ?(\w+)")
+    pattern1 = re.compile(r"销+售+方+(?:信+息+)? *名+ ?称+ ?[：:]* ?(.+?)(?:统+一+社+会+信+用+代+码+)? ?纳+税+人+识+别+号+ ?[:：]* ?([a-zA-Z0-9]+)")
     match_1 = pattern1.search(res)
     if match_1:
         seller_name = match_1.group(1)
@@ -58,11 +58,11 @@ def get_total_amount(res):
         return None
 
 
-def main(month="10月"):
+def main(month="6月"):
     root = Path("/Users/wuxiaomin/@个人/炎魂网络/@报销/")
     total = 0
     stat_info = defaultdict(list)
-    for f in root.rglob("10月/*.pdf"):
+    for f in root.rglob(f"{month}/*.pdf"):
         res = plumber_read_text(f)
         seller, seller_id = get_seller(res)
         stat_info["销售方"].append(seller)
