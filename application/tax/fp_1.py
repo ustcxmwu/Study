@@ -39,7 +39,7 @@ def plumber_read_text(f):
 
 def get_seller(res):
     # pattern1 = re.compile(r"销售方(?:信息)? *名 ?称[：:]? ?(.+?)(?:统一社会信用代码)? ?纳税人识别号[:：]? ?(\w+)")
-    pattern1 = re.compile(r"销+售+方+(?:信+息+)? *名+ ?称+ ?[：:]* ?(.+?)(?:统+一+社+会+信+用+代+码+)? ?纳+税+人+识+别+号+ ?[:：]* ?([a-zA-Z0-9]+)")
+    pattern1 = re.compile(r"销+售+方+(?:信+息+)? *名+ ?称+ ?[：:]* ?(.+?)(?:统+一+社+会+信+用+代+码+)? ?纳+税+人+识+别+号+ ?[:：]* ?(\w+)", flags=re.ASCII)
     match_1 = pattern1.search(res)
     if match_1:
         seller_name = match_1.group(1)
