@@ -80,7 +80,7 @@ def trainIters(actor, critic):
             dist, value = actor(state), critic(state)
 
             action = dist.sample()
-            next_state, reward, done, _ = env.step(action.cpu().numpy())
+            next_state, reward, done, _, _ = env.step(action.cpu().numpy())
 
             log_prob = dist.log_prob(action).unsqueeze(0)
             entropy += dist.entropy().mean()

@@ -58,7 +58,7 @@ def get_total_amount(res):
         return None
 
 
-def main(month="6月"):
+def main(month="10月"):
     root = Path("/Users/wuxiaomin/@个人/炎魂网络/@报销/")
     total = 0
     stat_info = defaultdict(list)
@@ -86,4 +86,4 @@ def main(month="6月"):
 
 
 if __name__ == '__main__':
-    main()
+    main(month="12月")

@@ -10,7 +10,7 @@ def user_check(func, username="root", passwd="123", *args, **kwargs):
         print("用户名或密码错误")
 
 
-@user_check(username="root")
+@user_check(username="root", passwd="13")
 def origin():
     print(origin)
     print("xxxxx")
