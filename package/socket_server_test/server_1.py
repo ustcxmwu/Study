@@ -1,17 +1,28 @@
-#  Copyright (c) 2020. Xiaomin Wu <xmwu@mail.ustc.edu.cn>
-#  All rights reserved.
-from socketserver import StreamRequestHandler, ThreadingTCPServer
+import socketserver
 
 
-class ThreadedTCPRequestHandler(StreamRequestHandler):
+# 定义请求处理器类，继承自socketserver.BaseRequestHandler
+class ThreadedTCPRequestHandler(socketserver.BaseRequestHandler):
     def handle(self):
-        print(self.server.mycustomdata)
+        # self.request是客户端的socket连接
+        data = self.request.recv(1024).strip()
+        print(f"Received from {self.client_address}: {data.decode('utf-8')}")
+
+        # 发送响应到客户端
+        response = f"Server received: {data.decode('utf-8')}"
+        self.request.sendall(response.encode("utf-8"))
 
 
+# 定义多线程TCP服务器类，继承自socketserver.ThreadingMixIn和socketserver.TCPServer
+class ThreadedTCPServer(socketserver.ThreadingMixIn, socketserver.TCPServer):
+    pass
 
-if __name__ == '__main__':
 
-    server = ThreadingTCPServer(('127.0.0.1', 8000), ThreadedTCPRequestHandler)
-    server.mycustomdata = 'foo.bar.z'
-    server.serve_forever()
+# 创建并启动服务器
+if __name__ == "__main__":
+    HOST, PORT = "localhost", 65432
 
+    server = ThreadedTCPServer((HOST, PORT), ThreadedTCPRequestHandler)
+    with server:
+        print(f"Server started at {HOST}:{PORT}")
+        server.serve_forever()

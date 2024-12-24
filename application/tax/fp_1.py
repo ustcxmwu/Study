@@ -7,8 +7,9 @@
 @Author  :   Wu Xiaomin <>
 @Version :   1.0
 @License :   (C)Copyright 2024, Wu Xiaomin
-@Desc    :   
+@Desc    :
 """
+
 import re
 from collections import defaultdict
 from pathlib import Path
@@ -32,14 +33,21 @@ def plumber_read_text(f):
             if tables:
                 for table in tables:
                     for row in table:
-                        res.append(" ".join([re.sub(r'[\n/]', "", r) for r in row if r is not None]))
+                        res.append(
+                            " ".join(
+                                [re.sub(r"[\n/]", "", r) for r in row if r is not None]
+                            )
+                        )
                         # print(row)
             return " ".join(res)
 
 
 def get_seller(res):
     # pattern1 = re.compile(r"销售方(?:信息)? *名 ?称[：:]? ?(.+?)(?:统一社会信用代码)? ?纳税人识别号[:：]? ?(\w+)")
-    pattern1 = re.compile(r"销+售+方+(?:信+息+)? *名+ ?称+ ?[：:]* ?(.+?)(?:统+一+社+会+信+用+代+码+)? ?纳+税+人+识+别+号+ ?[:：]* ?(\w+)", flags=re.ASCII)
+    pattern1 = re.compile(
+        r"销+售+方+(?:信+息+)? *名+ ?称+ ?[：:]* ?(.+?)(?:统+一+社+会+信+用+代+码+)? ?纳+税+人+识+别+号+ ?[:：]* ?(\w+)",
+        flags=re.ASCII,
+    )
     match_1 = pattern1.search(res)
     if match_1:
         seller_name = match_1.group(1)
@@ -50,7 +58,7 @@ def get_seller(res):
 
 
 def get_total_amount(res):
-    pattern = r'价税合计.*?([\d,.]+)'
+    pattern = r"价税合计.*?([\d,.]+)"
     match = re.search(pattern, res)
     if match:
         return match.group(1)
@@ -85,5 +93,5 @@ def main(month="10月"):
     # month.rename(f"{month.parent}/{month.stem}_{total:.2f}")
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main(month="12月")
