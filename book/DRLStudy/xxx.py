@@ -56,5 +56,17 @@ class MainProcess:
 
 
 if __name__ == "__main__":
-    main_process = MainProcess()
-    main_process.start_processes()
+    # main_process = MainProcess()
+    # main_process.start_processes()
+    my_list = [
+        {"id": 1, "name": "Alice"},
+        {"id": 2, "name": "Bob"},
+        {"id": 3, "name": "Charlie"},
+    ]
+
+    # 使用 reversed() 函数倒序遍历
+    for item in reversed(my_list):
+        item["xxx"] = item["name"].lower()
+        print(item)
+
+    print(my_list)
