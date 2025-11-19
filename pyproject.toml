@@ -11,6 +11,7 @@ dependencies = [
     "line-profiler>=4.2.0",
     "nicegui>=2.22.1",
     "numpy>=2.2.1",
+    "omegaconf>=2.3.0",
     "openpyxl>=3.1.5",
     "pandas>=2.2.3",
     "pdfplumber>=0.11.4",
@@ -18,6 +19,8 @@ dependencies = [
     "pyobjc-framework-quartz>=11.0",
     "python-dateutil>=2.9.0.post0",
     "pytz>=2024.2",
+    "reportlab>=4.4.5",
+    "sktime>=0.39.0",
     "stable-baselines3>=2.3.2",
     "tqdm>=4.67.1",
 ]
