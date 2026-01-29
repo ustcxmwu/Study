@@ -7,6 +7,7 @@ requires-python = ">=3.10"
 dependencies = [
     "apscheduler>=3.11.0",
     "decorator>=5.1.1",
+    "enlighten>=1.14.1",
     "gym>=0.26.2",
     "line-profiler>=4.2.0",
     "nicegui>=2.22.1",
@@ -22,6 +23,7 @@ dependencies = [
     "reportlab>=4.4.5",
     "sktime>=0.39.0",
     "stable-baselines3>=2.3.2",
+    "tensorboard>=2.20.0",
     "tqdm>=4.67.1",
 ]
 
