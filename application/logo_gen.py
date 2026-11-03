@@ -82,5 +82,5 @@ def generate_group_avatar(
 
 
 if __name__ == '__main__':
-    avatar = generate_group_avatar("群聊", "", bg_color="#007aff", size=512)
+    avatar = generate_group_avatar("算法导师", "", bg_color="#007aff", size=512)
     avatar.save("group_avatar.png")
