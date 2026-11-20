@@ -10,6 +10,7 @@ dependencies = [
     "enlighten>=1.14.1",
     "flet>=1.0.5",
     "gym>=0.26.2",
+    "joblib>=1.5.3",
     "line-profiler>=4.2.0",
     "nicegui>=2.22.1",
     "numpy>=2.2.1",
