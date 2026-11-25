@@ -10,7 +10,8 @@
 import argparse
 import re
 from pathlib import Path
-import pymupdf  # uv add pymupdf
+
+import pymupdf
 
 AMOUNT_PATTERNS = [
     # 优先匹配“金额合计 ... (小写)123.45”或“合计/总计”后的数字
@@ -21,6 +22,15 @@ AMOUNT_PATTERNS = [
         r"[¥￥]\s*([0-9]+(?:,[0-9]{3})*\.[0-9]{2})\s*(?:合计|总计)"
     ),
 ]
+
+
+def extract_date(pdf_path: str) -> str | None:
+    with pymupdf.open(pdf_path) as doc:
+        text = "\n".join(page.get_text("text") for page in doc)
+
+    visit_match = re.search(r"就诊日期[:：]\s*(\d{8})", text)
+
+    return visit_match.group(1) if visit_match else None
 
 
 def parse_args() -> argparse.Namespace:
@@ -49,6 +59,10 @@ def convert_pdfs(root_dir: Path, dpi: int = 250) -> None:
             continue
 
         with pymupdf.open(pdf_path) as doc:
+            visit_date = extract_date(pdf_path)
+            date_part = f"{visit_date}" if visit_date else "_未识别日期"
+            if not visit_date:
+                print(f"[提示] 未提取到就诊日期，使用占位标识：{pdf_path}")
             amount = extract_total_amount(doc)
             amount_part = f"_{amount}" if amount else "_未识别金额"
             if not amount:
@@ -57,11 +71,10 @@ def convert_pdfs(root_dir: Path, dpi: int = 250) -> None:
             page_count = len(doc)
             for page_idx, page in enumerate(doc, start=1):
                 page_part = "" if page_count == 1 else f"_p{page_idx}"
-                out_name = f"{pdf_path.stem}{amount_part}{page_part}.jpg"
+                out_name = f"{date_part}{amount_part}{page_part}.jpg"
                 out_path = pdf_path.parent / out_name
                 pix = page.get_pixmap(dpi=dpi)
                 pix.save(str(out_path))
-
 
 
 # uv run python convert_pdfs.py ./pdfs
