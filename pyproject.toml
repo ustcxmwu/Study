@@ -20,6 +20,7 @@ dependencies = [
     "pandas>=2.2.3",
     "pdfplumber>=0.11.4",
     "pygetwindow>=0.0.9",
+    "pymupdf>=1.28.2",
     "pyobjc-framework-quartz>=11.0",
     "python-dateutil>=2.9.0.post0",
     "pytz>=2024.2",
