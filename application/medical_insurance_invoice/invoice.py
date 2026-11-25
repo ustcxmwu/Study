@@ -13,13 +13,14 @@ from pathlib import Path
 
 import pymupdf
 
+AMOUNT_TOKEN_PATTERN = r"(?:[（(]\s*)?[+-−]?\s*[¥￥]?\s*[0-9]+(?:,[0-9]{3})*\.[0-9]{2}\s*(?:[）)])?"
 AMOUNT_PATTERNS = [
-    # 优先匹配“金额合计 ... (小写)123.45”或“合计/总计”后的数字
+    # 优先匹配“金额合计 ... (小写)-123.45”或“合计/总计”后的数字
     re.compile(
-        r"(?:金额合计|费用合计|合计|总计|总金额)[\s\S]{0,120}?(?:\(小写\)|小写|金额)?[：:\s]*[¥￥]?\s*([0-9]+(?:,[0-9]{3})*\.[0-9]{2})"
+        rf"(?:金额合计|费用合计|合计|总计|总金额)[\s\S]{{0,120}}?(?:\(小写\)|小写|金额)?[：:\s]*({AMOUNT_TOKEN_PATTERN})"
     ),
     re.compile(
-        r"[¥￥]\s*([0-9]+(?:,[0-9]{3})*\.[0-9]{2})\s*(?:合计|总计)"
+        rf"({AMOUNT_TOKEN_PATTERN})\s*(?:合计|总计)"
     ),
 ]
 
@@ -45,8 +46,19 @@ def extract_total_amount(doc: pymupdf.Document) -> str | None:
     for pattern in AMOUNT_PATTERNS:
         match = pattern.search(text)
         if match:
-            raw_amount = match.group(1).replace(",", "")
-            return f"{float(raw_amount):.2f}"
+            raw_amount = match.group(1)
+            normalized = (
+                raw_amount.replace(" ", "")
+                .replace(",", "")
+                .replace("¥", "")
+                .replace("￥", "")
+                .replace("−", "-")
+                .replace("（", "(")
+                .replace("）", ")")
+            )
+            if normalized.startswith("(") and normalized.endswith(")"):
+                normalized = f"-{normalized[1:-1]}"
+            return f"{float(normalized):.2f}"
     return None
 
 
@@ -56,6 +68,9 @@ def convert_pdfs(root_dir: Path, dpi: int = 250) -> None:
 
     for pdf_path in sorted(root_dir.rglob("*.pdf")):
         if not pdf_path.is_file():
+            continue
+        if "收费明细" in pdf_path.name:
+            print(f"[跳过] 收费明细 PDF，跳过处理：{pdf_path}")
             continue
 
         with pymupdf.open(pdf_path) as doc:
@@ -68,13 +83,26 @@ def convert_pdfs(root_dir: Path, dpi: int = 250) -> None:
             if not amount:
                 print(f"[提示] 未提取到合计金额，使用占位标识：{pdf_path}")
 
+            base_name = f"{date_part}{amount_part}"
+            date_dir = root_dir / visit_date if visit_date else pdf_path.parent
+            if visit_date:
+                date_dir.mkdir(parents=True, exist_ok=True)
+
             page_count = len(doc)
             for page_idx, page in enumerate(doc, start=1):
                 page_part = "" if page_count == 1 else f"_p{page_idx}"
-                out_name = f"{date_part}{amount_part}{page_part}.jpg"
-                out_path = pdf_path.parent / out_name
+                out_name = f"{base_name}{page_part}.jpg"
+                out_path = date_dir / out_name
                 pix = page.get_pixmap(dpi=dpi)
                 pix.save(str(out_path))
+
+        renamed_pdf_path = date_dir / f"{base_name}.pdf"
+        if pdf_path != renamed_pdf_path:
+            if renamed_pdf_path.exists():
+                print(f"[提示] PDF 目标文件已存在，跳过重命名：{renamed_pdf_path}")
+            else:
+                pdf_path.rename(renamed_pdf_path)
+                print(f"[重命名] {pdf_path.name} -> {renamed_pdf_path.name}")
 
 
 # uv run python convert_pdfs.py ./pdfs
